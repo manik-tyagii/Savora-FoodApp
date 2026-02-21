@@ -1,0 +1,23 @@
+{
+  "1": [
+    { "id": "1-1", "name": "Café Sandwich", "description": "Toasted sandwich with veggies and cheese.", "price": 149 },
+    { "id": "1-2", "name": "Blueberry Muffin", "description": "Freshly baked muffin with berries.", "price": 89 },
+    { "id": "1-3", "name": "Cappuccino", "description": "Foamy milk coffee.", "price": 79 }
+  ],
+  "2": [
+    { "id": "2-1", "name": "Butter Chicken", "description": "Creamy tomato-based chicken curry.", "price": 249 },
+    { "id": "2-2", "name": "Garlic Naan", "description": "Soft naan with garlic.", "price": 49 }
+  ],
+  "3": [
+    { "id": "3-1", "name": "Greek Salad", "description": "Fresh greens with feta and olives.", "price": 199 },
+    { "id": "3-2", "name": "Fruit Bowl", "description": "Seasonal fruits assortment.", "price": 129 }
+  ],
+  "4": [
+    { "id": "4-1", "name": "Biryani Plate", "description": "Aromatic biryani with raita.", "price": 259 },
+    { "id": "4-2", "name": "Kebab Platter", "description": "Mixed grill kebabs.", "price": 299 }
+  ],
+  "5": [
+    { "id": "5-1", "name": "Margherita Pizza", "description": "Classic cheese pizza.", "price": 199 },
+    { "id": "5-2", "name": "Pepperoni Pizza", "description": "Pepperoni and cheese.", "price": 249 }
+  ]
+}
