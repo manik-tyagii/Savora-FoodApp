@@ -75,7 +75,7 @@ function Navbar() {
 
                         <div className="flex items-center cursor-pointer">
                             <HelpCircle size={20} className="mr-1" />
-                            <span>Help</span>
+                            <span>Heelp</span>
                         </div>
 
                         <div className="flex items-center cursor-pointer">
