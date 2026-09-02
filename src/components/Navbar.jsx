@@ -28,7 +28,7 @@ function Navbar() {
     return (
         <nav className="
             w-full
-            bg-[#F5B800]
+            bg-[#4F46E5]
             shadow-[0_10px_18px_rgba(64,64,64,0.22),0_4px_6px_rgba(64,64,64,0.12)]
         ">
 
