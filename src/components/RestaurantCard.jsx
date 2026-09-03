@@ -1,6 +1,8 @@
 import { BASE_URL } from "../utils/constant";
 import { useNavigate } from "react-router-dom";
 import generateAIDishImage from "../utils/aiImage";
+import { Heart } from "lucide-react";
+import { useState } from "react";
 
 function RestaurantCard({ res }) {
   const navigate = useNavigate();
@@ -13,6 +15,18 @@ function RestaurantCard({ res }) {
     sla = {},
     areaName,
   } = res?.info || {};
+  const [isFavorite, setIsFavorite] = useState(
+    () => localStorage.getItem(`savora-favorite-${res?.info?.id}`) === "true",
+  );
+
+  const openRestaurant = () => navigate(`/restaurant/${res?.info?.id}`);
+
+  const toggleFavorite = (event) => {
+    event.stopPropagation();
+    const nextValue = !isFavorite;
+    setIsFavorite(nextValue);
+    localStorage.setItem(`savora-favorite-${res?.info?.id}`, String(nextValue));
+  };
 
   // prefer actual image, otherwise use a small AI-generated SVG preview
   const aiKey = `ai_img_${res?.info?.id}`;
@@ -41,7 +55,12 @@ function RestaurantCard({ res }) {
 
   return (
     <div
-      onClick={() => navigate(`/restaurant/${res?.info?.id}`)}
+      onClick={openRestaurant}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") openRestaurant();
+      }}
+      role="button"
+      tabIndex={0}
       className="
             rounded-2xl overflow-hidden pb-3 bg-white
             savora-card
@@ -72,6 +91,19 @@ function RestaurantCard({ res }) {
             </div>
           )}
         </div>
+        <button
+          type="button"
+          className={`favorite-button ${isFavorite ? "is-favorite" : ""}`}
+          onClick={toggleFavorite}
+          aria-label={
+            isFavorite
+              ? `Remove ${name} from favorites`
+              : `Save ${name} to favorites`
+          }
+          aria-pressed={isFavorite}
+        >
+          <Heart size={17} fill={isFavorite ? "currentColor" : "none"} />
+        </button>
       </div>
 
       {/* Content */}

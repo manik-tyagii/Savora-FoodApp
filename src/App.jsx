@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import RestaurantDetail from "./components/RestaurantDetail";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
+import Chatbot from "./components/Chatbot";
 
 function App() {
   const location = useLocation();
@@ -80,6 +81,7 @@ function App() {
 
       {/* Footer */}
       {user && !shouldHideLayout && <Footer />}
+      {user && !shouldHideLayout && <Chatbot />}
     </div>
   );
 }

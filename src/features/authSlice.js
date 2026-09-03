@@ -13,7 +13,7 @@ const signupUser = createAsyncThunk(
       const userCredentials = await createUserWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
 
       // ✅ return only serializable data
@@ -24,7 +24,7 @@ const signupUser = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 // LOGIN
@@ -35,7 +35,7 @@ const loginUser = createAsyncThunk(
       const userCredentials = await signInWithEmailAndPassword(
         auth,
         email,
-        password
+        password,
       );
 
       // ✅ return only serializable data
@@ -46,7 +46,19 @@ const loginUser = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.message);
     }
-  }
+  },
+);
+
+const signOutCurrentUser = createAsyncThunk(
+  "auth/signOut",
+  async (_, { rejectWithValue }) => {
+    try {
+      await signOutUser();
+      return true;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  },
 );
 
 const authSlice = createSlice({
@@ -102,19 +114,6 @@ const authSlice = createSlice({
     });
   },
 });
-
-// sign out thunk
-const signOutCurrentUser = createAsyncThunk(
-  "auth/signOut",
-  async (_, { rejectWithValue }) => {
-    try {
-      await signOutUser();
-      return true;
-    } catch (error) {
-      return rejectWithValue(error.message);
-    }
-  }
-);
 
 export const { logout, setUser } = authSlice.actions;
 export { loginUser, signupUser, signOutCurrentUser };

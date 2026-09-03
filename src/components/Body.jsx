@@ -3,15 +3,14 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { DATA_URL } from "../utils/constant";
 import RestaurantCard from "./RestaurantCard";
+import { ArrowDownUp, Search, Star, X } from "lucide-react";
 
-function Body() {
+function Body({ isTopRated, setIsTopRated, sortOrder, toggleSort }) {
   const location = useLocation();
   const [resList, setResList] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [isTopRated, setIsTopRated] = useState(false); // ✅ NEW STATE
-  const [sortOrder, setSortOrder] = useState(null); // null | 'asc' | 'desc'
   const activeCuisine = useSelector((state) => state.restaurants.activeCuisine);
 
   const fetchData = async () => {
@@ -94,19 +93,21 @@ function Body() {
     }
   }, [location]);
 
-  // Toggle ascending sort only
-  const toggleSort = () =>
-    setSortOrder((prev) => (prev === "asc" ? null : "asc"));
-
   // ✅ SINGLE SOURCE OF TRUTH FOR FILTERING
   useEffect(() => {
     let updatedList = resList;
 
     // Search Filter
     if (search.trim() !== "") {
-      updatedList = updatedList.filter((item) =>
-        item?.info?.name?.toLowerCase().includes(search.toLowerCase()),
-      );
+      const query = search.toLowerCase();
+      updatedList = updatedList.filter((item) => {
+        const info = item?.info || {};
+        return [info.name, info.areaName, ...(info.cuisines || [])]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase()
+          .includes(query);
+      });
     }
 
     // Cuisine filter from Section1 (global)
@@ -127,12 +128,11 @@ function Body() {
       updatedList = updatedList.filter((item) => item?.info?.avgRating > 4.0);
     }
 
-    // Sort ascending by avgRating when sortOrder === 'asc'
-    if (sortOrder === "asc") {
+    if (sortOrder) {
       updatedList = [...updatedList].sort((a, b) => {
         const ra = parseFloat(a?.info?.avgRating) || 0;
         const rb = parseFloat(b?.info?.avgRating) || 0;
-        return ra - rb;
+        return sortOrder === "desc" ? rb - ra : ra - rb;
       });
     }
     setFilteredRestaurant(updatedList);
@@ -141,63 +141,69 @@ function Body() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
       {/* Search */}
-      <div className="mb-6">
+      <div className="search-shell mb-6">
+        <Search className="search-icon" size={18} aria-hidden="true" />
         <input
           type="text"
-          className="w-full rounded-xl border px-4 py-3 outline-none text-gray-700 focus:ring-2 focus:ring-orange-400"
+          className="search-input w-full rounded-xl border px-4 py-3 pr-36 outline-none text-gray-700 focus:ring-2 focus:ring-orange-400"
           placeholder="Search restaurants..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        {search && (
+          <button
+            type="button"
+            className="search-clear"
+            onClick={() => setSearch("")}
+            aria-label="Clear restaurant search"
+          >
+            <X size={16} />
+          </button>
+        )}
+        <span className="search-result-count">
+          {filteredRestaurant.length} restaurants
+        </span>
       </div>
 
-      {/* Top Rated Toggle Button */}
-      <div className="mb-6 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <button
-            className={`px-6 py-3 text-white rounded-full transition ${
-              isTopRated
-                ? "bg-orange-600 hover:bg-orange-700"
-                : "bg-gray-600 hover:bg-gray-800"
-            }`}
-            onClick={() => setIsTopRated(!isTopRated)} // ✅ TOGGLE
-          >
-            ⚡ {isTopRated ? "Showing Top Rated (Click to Reset)" : "Top Rated"}
-          </button>
-
-          <button
-            onClick={toggleSort}
-            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition transform focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-              sortOrder === "asc"
-                ? "bg-gradient-to-r from-orange-500 to-yellow-400 text-white shadow-md hover:scale-105 focus:ring-orange-300"
-                : "bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 focus:ring-gray-200"
-            }`}
-            title="Toggle ascending sort on/off"
-            aria-pressed={sortOrder === "asc"}
-          >
-            <span className="whitespace-nowrap">Sort</span>
-          </button>
-        </div>
-        <div>
-          {/* Top 15 preview label */}
-          <span className="text-sm text-gray-600">Top restaurants: 15</span>
-        </div>
+      <div className="mobile-filter-toolbar mb-6">
+        <button
+          type="button"
+          className={`filter-pill ${isTopRated ? "is-active" : ""}`}
+          onClick={() => setIsTopRated(!isTopRated)}
+          aria-pressed={isTopRated}
+        >
+          <Star size={15} fill="currentColor" />
+          {isTopRated ? "Top rated on" : "Top rated"}
+        </button>
+        <button
+          type="button"
+          className={`filter-pill ${sortOrder ? "is-sorted" : ""}`}
+          onClick={toggleSort}
+        >
+          <ArrowDownUp size={15} />
+          {sortOrder === "desc"
+            ? "Highest rated"
+            : sortOrder === "asc"
+              ? "Lowest rated"
+              : "Sort"}
+        </button>
       </div>
 
       {/* Top 15 Restaurants section removed as requested */}
 
       {isLoading ? (
-        <p className="text-center text-gray-500 py-10">
-          Loading restaurants...
-        </p>
+        <div
+          className="restaurant-skeleton-grid"
+          aria-label="Loading restaurants"
+        >
+          {Array.from({ length: 8 }, (_, index) => (
+            <div className="restaurant-skeleton" key={index} />
+          ))}
+        </div>
       ) : filteredRestaurant.length === 0 ? (
         <p className="text-center text-gray-500 py-10">No restaurants found</p>
       ) : (
         <div id="restaurants">
-          <h2 className="text-lg sm:text-2xl font-bold text-gray-700 mb-4 sm:mb-6">
-            {filteredRestaurant.length} Restaurants to explore...
-          </h2>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {filteredRestaurant.map((e) => (
               <RestaurantCard key={e?.info?.id} res={e} />

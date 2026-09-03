@@ -97,11 +97,13 @@ function Section1() {
 
               <div className="flex-1">
                 <h3 className="text-xl font-bold text-gray-900">
-                  Welcome, {displayName}!
+                  Welcome, <span className="user-name">{displayName} ji</span>!
                 </h3>
                 <p className="text-sm text-gray-600 mt-1">
-                  Welcome back, {displayName}. Your personal table is ready with
-                  flavours picked for your kind of day.
+                  Welcome back,{" "}
+                  <span className="user-name">{displayName} ji</span>. Your
+                  personal table is ready with flavours picked for your kind of
+                  day.
                 </p>
 
                 <div className="user-note mt-4">

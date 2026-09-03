@@ -4,17 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { signOutCurrentUser } from "../features/authSlice";
 import SavoraLogo from "../assets/savora-logo1.png";
 
-import {
-  Briefcase,
-  HelpCircle,
-  Search,
-  ShoppingBagIcon,
-  User,
-  Menu,
-  X,
-  Sun,
-  Moon,
-} from "lucide-react";
+import { ShoppingBagIcon, Menu, X, Sun, Moon } from "lucide-react";
 
 function Navbar({ theme, onToggleTheme }) {
   const dispatch = useDispatch();
@@ -32,12 +22,12 @@ function Navbar({ theme, onToggleTheme }) {
     <nav
       className="
                 w-full
-                bg-blue-600
-                shadow-[0_10px_18px_rgba(64,64,64,0.22),0_4px_6px_rgba(64,64,64,0.12)]
+                navbar-shell
+                navbar-shadow
             "
     >
       {/* Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:pl-8 lg:pr-0">
         {/* Main Navbar */}
         <div className="flex items-center justify-between py-1.5 sm:py-2">
           {/* Logo */}
@@ -48,7 +38,7 @@ function Navbar({ theme, onToggleTheme }) {
             <img
               src={SavoraLogo}
               alt="Savora Logo"
-              className="h-6 sm:h-7 w-auto rounded-lg"
+              className="h-9 sm:h-10 w-auto rounded-lg"
             />
 
             <div className="ml-2 sm:ml-3 flex flex-col leading-tight">
@@ -79,34 +69,10 @@ function Navbar({ theme, onToggleTheme }) {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-4 text-sm text-white">
-            {/* Corporate */}
-            <div className="flex items-center cursor-pointer hover:text-blue-100 transition">
-              <Briefcase size={16} className="mr-1" />
-              <span>Savora Corporate</span>
-            </div>
-
-            {/* Search */}
-            <div className="flex items-center cursor-pointer hover:text-blue-100 transition">
-              <Search size={16} className="mr-1" />
-              <span>Search</span>
-            </div>
-
-            {/* Help */}
-            <div className="flex items-center cursor-pointer hover:text-blue-100 transition">
-              <HelpCircle size={16} className="mr-1" />
-              <span>Help</span>
-            </div>
-
-            {/* Sign In */}
-            <div className="flex items-center cursor-pointer hover:text-blue-100 transition">
-              <User size={16} className="mr-1" />
-              <span>Sign In</span>
-            </div>
-
+          <div className="hidden lg:ml-auto lg:flex items-center space-x-5 text-sm text-white">
             {/* Cart */}
             <div
-              className="flex items-center cursor-pointer hover:text-blue-100 transition"
+              className="navbar-link flex items-center cursor-pointer"
               onClick={() => navigate("/cart")}
             >
               <div className="relative">
@@ -156,6 +122,7 @@ function Navbar({ theme, onToggleTheme }) {
                                 py-1
                                 text-sm
                                 rounded-2xl
+                                lg:mr-[-2rem]
                                 hover:bg-orange-600
                                 transition
                             "
@@ -183,33 +150,9 @@ function Navbar({ theme, onToggleTheme }) {
                             text-white
                         "
           >
-            {/* Corporate */}
-            <div className="flex items-center gap-2 cursor-pointer">
-              <Briefcase size={20} />
-              <span>Savora Corporate</span>
-            </div>
-
-            {/* Search */}
-            <div className="flex items-center gap-2 cursor-pointer">
-              <Search size={20} />
-              <span>Search</span>
-            </div>
-
-            {/* Help */}
-            <div className="flex items-center gap-2 cursor-pointer">
-              <HelpCircle size={20} />
-              <span>Help</span>
-            </div>
-
-            {/* Sign In */}
-            <div className="flex items-center gap-2 cursor-pointer">
-              <User size={20} />
-              <span>Sign In</span>
-            </div>
-
             {/* Bag */}
             <div
-              className="flex items-center gap-2 cursor-pointer"
+              className="navbar-link flex items-center gap-2 cursor-pointer"
               onClick={() => navigate("/cart")}
             >
               <ShoppingBagIcon size={20} />
