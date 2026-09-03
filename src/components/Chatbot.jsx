@@ -146,7 +146,7 @@ function Chatbot() {
       // No answer
       // --------------------------------------------------
       if (!data?.answer) {
-        throw new Error("Gemini returned an empty answer.");
+        throw new Error(data?.error || "Gemini returned an empty answer.");
       }
 
       // --------------------------------------------------

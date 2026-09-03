@@ -1,83 +1,4 @@
-const GEMINI_MODEL = "gemini-2.5-flash";
-
-const createFallbackAnswer = (message, restaurants = [], history = []) => {
-  const text = String(message).toLowerCase();
-  const previousNames = new Set(
-    history
-      .filter((item) => item?.role === "assistant")
-      .flatMap((item) =>
-        restaurants
-          .map((restaurant) => restaurant.name)
-          .filter(
-            (name) =>
-              name &&
-              String(item.text || "")
-                .toLowerCase()
-                .includes(name.toLowerCase()),
-          ),
-      ),
-  );
-  const wantsAnother = /(another|different|other|else|more option)/.test(text);
-  const intents = [
-    ["hotpot", ["hotpot", "hot pot", "asian"]],
-    ["pizza", ["pizza", "italian"]],
-    ["burger", ["burger", "fast food"]],
-    ["spicy", ["spicy", "indian", "biryani", "curry", "mexican"]],
-    ["healthy", ["healthy", "salad", "vegetarian", "veg", "fresh"]],
-    ["sweet", ["sweet", "dessert", "ice cream", "bakery"]],
-  ];
-  const intent = intents.find(([, tokens]) =>
-    tokens.some((token) => text.includes(token)),
-  );
-  const repeatedPrompt = history.some(
-    (item) =>
-      item?.role === "user" &&
-      String(item.text || "")
-        .trim()
-        .toLowerCase() === text,
-  );
-
-  const ranked = restaurants
-    .map((restaurant) => {
-      const searchable =
-        `${restaurant.name} ${(restaurant.cuisines || []).join(" ")}`.toLowerCase();
-      const matchesIntent = intent?.[1].some((token) =>
-        searchable.includes(token),
-      );
-      let score = Number(restaurant.rating || 0) * 10;
-      if (intent) score += matchesIntent ? 150 : -30;
-      if (
-        (wantsAnother || repeatedPrompt) &&
-        previousNames.has(restaurant.name)
-      ) {
-        score -= 200;
-      }
-      return { restaurant, score, matchesIntent };
-    })
-    .sort((left, right) => right.score - left.score);
-  const candidate =
-    ranked.find(
-      (item) =>
-        !(
-          (wantsAnother || repeatedPrompt) &&
-          previousNames.has(item.restaurant.name)
-        ),
-    ) || ranked[0];
-  const selected = candidate?.restaurant;
-
-  if (!selected?.name)
-    return "I could not load the restaurant list yet. Please try again in a moment.";
-
-  const cuisine =
-    Array.isArray(selected.cuisines) && selected.cuisines.length
-      ? ` (${selected.cuisines.slice(0, 2).join(" and ")})`
-      : "";
-  const rating = selected.rating
-    ? ` with a ${Number(selected.rating).toFixed(1)}-star rating`
-    : "";
-
-  return `${wantsAnother || repeatedPrompt ? "Another option is" : "I recommend"} ${selected.name}${cuisine}${rating}.`;
-};
+const GEMINI_MODEL = "gemini-3.6-flash";
 
 export const handler = async (event) => {
   // Only POST requests
@@ -132,12 +53,13 @@ export const handler = async (event) => {
     }
 
     if (!apiKey) {
-      console.error("GEMINI_API_KEY is missing; using local chatbot fallback.");
+      console.error("GEMINI_API_KEY is missing.");
       return {
-        statusCode: 200,
+        statusCode: 503,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          answer: createFallbackAnswer(message, restaurantContext, history),
+          error:
+            "Gemini is not configured. Add GEMINI_API_KEY to the Netlify environment variables.",
         }),
       };
     }
@@ -157,7 +79,8 @@ export const handler = async (event) => {
       .join("\n");
 
     /*
-     * Keep restaurant data reasonably small.
+     * Keep restaurant data reasonably small. It is only relevant for
+     * recommendation requests, not factual questions about food.
      */
     const restaurantText = restaurantContext
       .slice(0, 30)
@@ -213,7 +136,7 @@ ${message}
             systemInstruction: {
               parts: [
                 {
-                  text: "You are Savora AI, a precise food recommendation assistant. Follow the latest customer request first. For a specific cuisine or dish such as hotpot, pizza, burger, biryani, Indian, Chinese, healthy, dessert, or spicy, recommend only a restaurant whose name or cuisine directly matches it. Never choose a cafe or the highest-rated restaurant just because it has the best rating. Treat words like today, order, dinner, and food as context, not cuisine. Use only restaurants in the provided list, do not invent names, and be honest when there is no exact match. For broad requests, use rating and area as tie-breakers. If the customer asks for another option, avoid restaurants already recommended in the recent conversation. Reply in 1 or 2 short sentences with the restaurant name, matching cuisine, and rating when available. Never claim to place an order.",
+                  text: "You are Savora AI, a helpful food assistant. Follow the latest customer request first. If the customer asks what a dish is, how it is made, its ingredients, taste, or nutrition, answer that food question directly and accurately in 2 to 4 short sentences; do not recommend a restaurant unless they ask for one. For restaurant recommendations, use only the provided restaurant list, match the requested dish or cuisine directly, and never invent restaurant names. Never choose a cafe or the highest-rated restaurant just because it has the best rating. Treat words like today, order, dinner, and food as context, not cuisine. If the customer asks for another option, avoid restaurants already recommended in the recent conversation. Never claim to place an order.",
                 },
               ],
             },
@@ -238,13 +161,23 @@ ${message}
     if (!geminiResponse.ok) {
       console.error("Gemini API error:", responseText);
 
+      let upstreamError = "Unknown Gemini API error";
+      try {
+        const errorData = JSON.parse(responseText);
+        upstreamError = errorData?.error?.message || upstreamError;
+      } catch {
+        if (responseText.trim()) {
+          upstreamError = responseText.slice(0, 200);
+        }
+      }
+
       return {
-        statusCode: 200,
+        statusCode: 502,
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          answer: createFallbackAnswer(message, restaurantContext, history),
+          error: `Gemini API error: ${upstreamError}`,
         }),
       };
     }
@@ -257,12 +190,12 @@ ${message}
       console.error("Gemini returned invalid JSON:", responseText);
 
       return {
-        statusCode: 200,
+        statusCode: 502,
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          answer: createFallbackAnswer(message, restaurantContext, history),
+          error: "Gemini returned an invalid response. Please try again.",
         }),
       };
     }
@@ -273,18 +206,25 @@ ${message}
       .trim();
 
     if (!answer) {
+      const finishReason = geminiData?.candidates?.[0]?.finishReason;
+      const blockReason = geminiData?.promptFeedback?.blockReason;
+
       console.error(
         "No answer found in Gemini response:",
         JSON.stringify(geminiData),
       );
 
       return {
-        statusCode: 200,
+        statusCode: 502,
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          answer: createFallbackAnswer(message, restaurantContext, history),
+          error: blockReason
+            ? `Gemini blocked this request (${blockReason}). Please try a different question.`
+            : finishReason
+              ? `Gemini stopped without an answer (${finishReason}). Please try again.`
+              : "Gemini returned an empty answer. Please try again.",
         }),
       };
     }

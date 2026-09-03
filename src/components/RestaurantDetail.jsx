@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurants } from "../features/restaurantsSlice";
 import { addItem } from "../features/cartSlice";
 import generateAIDishImage from "../utils/aiImage";
+import { createMenuForRestaurant } from "../utils/menuTemplates";
 import { storage } from "../utils/storage";
 
 function RestaurantDetail() {
@@ -21,26 +22,13 @@ function RestaurantDetail() {
       .then((r) => r.json())
       .then((data) => {
         setMenu(
-          data[id] || [
-            {
-              id: `${id}-1`,
-              name: "Chef's Special Platter",
-              description: "A generous serving made fresh to order.",
-              price: 229,
-            },
-            {
-              id: `${id}-2`,
-              name: "Signature House Bowl",
-              description: "Our most-loved bowl with seasonal ingredients.",
-              price: 179,
-            },
-            {
-              id: `${id}-3`,
-              name: "Something Sweet",
-              description: "A little dessert to finish on a delicious note.",
-              price: 99,
-            },
-          ],
+          data[id] ||
+            createMenuForRestaurant(
+              id,
+              list.find(
+                (restaurant) => String(restaurant.info?.id) === String(id),
+              )?.info?.cuisines || [],
+            ),
         );
       })
       .catch(() => setMenu([]));
