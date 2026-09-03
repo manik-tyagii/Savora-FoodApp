@@ -1,6 +1,7 @@
 import { BASE_URL } from "../utils/constant";
 import { useNavigate } from "react-router-dom";
 import generateAIDishImage from "../utils/aiImage";
+import { storage, getStoredBoolean } from "../utils/storage";
 import { Heart } from "lucide-react";
 import { useState } from "react";
 
@@ -15,8 +16,8 @@ function RestaurantCard({ res }) {
     sla = {},
     areaName,
   } = res?.info || {};
-  const [isFavorite, setIsFavorite] = useState(
-    () => localStorage.getItem(`savora-favorite-${res?.info?.id}`) === "true",
+  const [isFavorite, setIsFavorite] = useState(() =>
+    getStoredBoolean(`savora-favorite-${res?.info?.id}`),
   );
 
   const openRestaurant = () => navigate(`/restaurant/${res?.info?.id}`);
@@ -25,14 +26,14 @@ function RestaurantCard({ res }) {
     event.stopPropagation();
     const nextValue = !isFavorite;
     setIsFavorite(nextValue);
-    localStorage.setItem(`savora-favorite-${res?.info?.id}`, String(nextValue));
+    storage.set(`savora-favorite-${res?.info?.id}`, String(nextValue));
   };
 
   // prefer actual image, otherwise use a small AI-generated SVG preview
   const aiKey = `ai_img_${res?.info?.id}`;
   let fallbackAi = null;
   try {
-    const cached = localStorage.getItem(aiKey);
+    const cached = storage.get(aiKey);
     if (cached) fallbackAi = cached;
     else {
       const generated = generateAIDishImage({
@@ -42,11 +43,7 @@ function RestaurantCard({ res }) {
       });
       if (generated) {
         fallbackAi = generated;
-        try {
-          localStorage.setItem(aiKey, generated);
-        } catch {
-          /* ignore */
-        }
+        storage.set(aiKey, generated);
       }
     }
   } catch {

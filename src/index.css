@@ -309,8 +309,8 @@ textarea:focus {
 
 .savora-chatbot {
   position: fixed;
-  right: 1.25rem;
-  bottom: 1.25rem;
+  right: 1rem;
+  bottom: 1rem;
   z-index: 40;
   display: flex;
   flex-direction: column;
@@ -320,8 +320,8 @@ textarea:focus {
 
 .chat-panel {
   display: flex;
-  width: min(22rem, calc(100vw - 2rem));
-  max-height: min(34rem, calc(100vh - 6rem));
+  width: min(22rem, calc(100vw - 1rem));
+  max-height: min(34rem, calc(100vh - 4rem));
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--savora-border);
@@ -410,6 +410,8 @@ textarea:focus {
   padding: 0.6rem 0.7rem;
   font-size: 0.72rem;
   line-height: 1.45;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .chat-message.assistant {
@@ -442,6 +444,7 @@ textarea:focus {
   padding: 0.35rem 0.5rem;
   color: var(--savora-muted);
   font-size: 0.58rem;
+  touch-action: manipulation;
 }
 
 .chat-prompts button:hover {
@@ -472,6 +475,7 @@ textarea:focus {
   border-radius: 999px;
   background: var(--savora-coral);
   color: white;
+  touch-action: manipulation;
 }
 
 .chat-form button:disabled {
@@ -518,13 +522,32 @@ textarea:focus {
 
 @media (max-width: 480px) {
   .savora-chatbot {
-    right: 0.8rem;
-    bottom: 0.8rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+  }
+
+  .chat-panel {
+    width: min(20rem, calc(100vw - 0.75rem));
+    max-height: min(28rem, calc(100vh - 3rem));
   }
 
   .chat-launcher {
     min-height: 2.6rem;
     padding-right: 0.85rem;
+    font-size: 0.72rem;
+  }
+
+  .chat-message {
+    max-width: 92%;
+    font-size: 0.7rem;
+  }
+
+  .chat-form {
+    padding: 0.55rem;
+  }
+
+  .chat-form input {
+    font-size: 0.7rem;
   }
 }
 

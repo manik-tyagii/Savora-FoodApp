@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchRestaurants } from "../features/restaurantsSlice";
 import { addItem } from "../features/cartSlice";
 import generateAIDishImage from "../utils/aiImage";
+import { storage } from "../utils/storage";
 
 function RestaurantDetail() {
   const { id } = useParams();
@@ -54,7 +55,7 @@ function RestaurantDetail() {
   const aiKey = `ai_img_${restaurant.info.id}`;
   let fallbackAi = null;
   try {
-    const cached = localStorage.getItem(aiKey);
+    const cached = storage.get(aiKey);
     if (cached) fallbackAi = cached;
     else {
       const generated = generateAIDishImage({
@@ -66,11 +67,7 @@ function RestaurantDetail() {
       });
       if (generated) {
         fallbackAi = generated;
-        try {
-          localStorage.setItem(aiKey, generated);
-        } catch {
-          fallbackAi = generated;
-        }
+        storage.set(aiKey, generated);
       }
     }
   } catch {

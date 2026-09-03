@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signOutCurrentUser } from "../features/authSlice";
+import { storage } from "../utils/storage";
 import SavoraLogo from "../assets/savora-logo1.png";
 
 import {
@@ -37,8 +38,9 @@ function Navbar({ theme, onToggleTheme }) {
   }, [open]);
 
   const favoriteRestaurants = restaurants
-    .filter((restaurant) =>
-      localStorage.getItem(`savora-favorite-${restaurant?.info?.id}`) === "true",
+    .filter(
+      (restaurant) =>
+        storage.get(`savora-favorite-${restaurant?.info?.id}`) === "true",
     )
     .slice(0, 6);
 
@@ -229,13 +231,16 @@ function Navbar({ theme, onToggleTheme }) {
 
               <div className="nav-drawer-section">
                 <div className="nav-drawer-section-title">
-                  <span><Heart size={16} /> Favourite restaurants</span>
+                  <span>
+                    <Heart size={16} /> Favourite restaurants
+                  </span>
                   <small>{favoriteRestaurants.length}</small>
                 </div>
                 {favoriteRestaurants.length ? (
                   favoriteRestaurants.map((restaurant) => {
                     const restaurantId = restaurant?.info?.id;
-                    const restaurantName = restaurant?.info?.name || "Restaurant";
+                    const restaurantName =
+                      restaurant?.info?.name || "Restaurant";
                     return (
                       <button
                         type="button"
@@ -264,7 +269,11 @@ function Navbar({ theme, onToggleTheme }) {
                   {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
                   {theme === "light" ? "Dark mode" : "Light mode"}
                 </button>
-                <button type="button" className="nav-logout" onClick={handleLogout}>
+                <button
+                  type="button"
+                  className="nav-logout"
+                  onClick={handleLogout}
+                >
                   Logout
                 </button>
               </div>

@@ -12,16 +12,19 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Chatbot from "./components/Chatbot";
 
+import { storage } from "./utils/storage";
+
 function App() {
   const location = useLocation();
   const { user } = useSelector((state) => state.auth);
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("savora-theme") || "dark",
-  );
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = storage.get("savora-theme", "dark");
+    return savedTheme === "light" ? "light" : "dark";
+  });
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    localStorage.setItem("savora-theme", theme);
+    storage.set("savora-theme", theme);
   }, [theme]);
 
   const hideLayoutRoutes = ["/login", "/signup"];
