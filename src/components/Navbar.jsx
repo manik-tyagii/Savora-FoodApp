@@ -1,17 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signOutCurrentUser } from "../features/authSlice";
 import SavoraLogo from "../assets/savora-logo1.png";
 
-import { ShoppingBagIcon, Menu, X, Sun, Moon } from "lucide-react";
+import {
+  ShoppingBagIcon,
+  Menu,
+  X,
+  Sun,
+  Moon,
+  UserRound,
+  MapPin,
+  Heart,
+  ChevronRight,
+} from "lucide-react";
 
 function Navbar({ theme, onToggleTheme }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [restaurants, setRestaurants] = useState([]);
 
   const cartCount = useSelector((state) => state.cart.items.length || 0);
+  const user = useSelector((state) => state.auth.user);
+  const displayName =
+    user?.displayName || user?.email?.split("@")[0] || "Food lover";
+
+  useEffect(() => {
+    if (!open) return;
+
+    fetch("/mock/restaurants.json")
+      .then((response) => response.json())
+      .then((data) => setRestaurants(Array.isArray(data) ? data : []))
+      .catch(() => setRestaurants([]));
+  }, [open]);
+
+  const favoriteRestaurants = restaurants
+    .filter((restaurant) =>
+      localStorage.getItem(`savora-favorite-${restaurant?.info?.id}`) === "true",
+    )
+    .slice(0, 6);
+
+  const goTo = (path) => {
+    setOpen(false);
+    navigate(path);
+  };
 
   const handleLogout = async () => {
     await dispatch(signOutCurrentUser());
@@ -122,68 +156,119 @@ function Navbar({ theme, onToggleTheme }) {
                                 py-1
                                 text-sm
                                 rounded-2xl
-                                lg:mr-[-2rem]
                                 hover:bg-orange-600
                                 transition
                             "
             >
               Logout
+            </button>
+
+            <button
+              type="button"
+              className="navbar-menu-trigger lg:-ml-12 lg:translate-x-10"
+              onClick={() => setOpen(true)}
+              aria-label="Open profile and favorites menu"
+              title="Profile and favorites"
+            >
+              <Menu size={17} />
             </button>
           </div>
 
           {/* Mobile Toggle */}
           <button
             className="lg:hidden text-white"
-            onClick={() => setOpen(!open)}
+            onClick={() => setOpen(true)}
+            aria-label="Open profile and favorites menu"
           >
-            {open ? <X size={28} /> : <Menu size={28} />}
+            <Menu size={28} />
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Profile and favorites drawer */}
         {open && (
-          <div
-            className="
-                            lg:hidden
-                            pb-6
-                            space-y-4
-                            text-white
-                        "
-          >
-            {/* Bag */}
-            <div
-              className="navbar-link flex items-center gap-2 cursor-pointer"
-              onClick={() => navigate("/cart")}
-            >
-              <ShoppingBagIcon size={20} />
-              <span>Bag ({cartCount})</span>
-            </div>
-
+          <div className="nav-drawer-layer" role="dialog" aria-modal="true">
             <button
               type="button"
-              onClick={onToggleTheme}
-              className="theme-toggle flex items-center gap-2"
-              aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-            >
-              {theme === "light" ? <Moon size={19} /> : <Sun size={19} />}
-              <span>{theme === "light" ? "Dark mode" : "Light mode"}</span>
-            </button>
+              className="nav-drawer-backdrop"
+              onClick={() => setOpen(false)}
+              aria-label="Close menu"
+            />
+            <aside className="nav-drawer">
+              <div className="nav-drawer-heading">
+                <div>
+                  <p className="nav-drawer-kicker">Your Savora</p>
+                  <h2>Profile & favourites</h2>
+                </div>
+                <button
+                  type="button"
+                  className="nav-drawer-close"
+                  onClick={() => setOpen(false)}
+                  aria-label="Close profile and favorites menu"
+                >
+                  <X size={20} />
+                </button>
+              </div>
 
-            {/* Logout */}
-            <button
-              onClick={handleLogout}
-              className="
-                                w-full
-                                bg-orange-500
-                                text-white
-                                py-3
-                                rounded-2xl
-                                hover:bg-orange-600
-                                transition
-                            "
-            >
-              Logout
-            </button>
+              <div className="nav-profile-card">
+                <span className="nav-profile-avatar">
+                  <UserRound size={21} />
+                </span>
+                <div>
+                  <strong>{displayName}</strong>
+                  <span>{user?.email || "Food lover"}</span>
+                </div>
+              </div>
+
+              <div className="nav-delivery-row">
+                <MapPin size={17} />
+                <span>
+                  <small>Delivery address</small>
+                  Bengaluru
+                </span>
+              </div>
+
+              <div className="nav-drawer-section">
+                <div className="nav-drawer-section-title">
+                  <span><Heart size={16} /> Favourite restaurants</span>
+                  <small>{favoriteRestaurants.length}</small>
+                </div>
+                {favoriteRestaurants.length ? (
+                  favoriteRestaurants.map((restaurant) => {
+                    const restaurantId = restaurant?.info?.id;
+                    const restaurantName = restaurant?.info?.name || "Restaurant";
+                    return (
+                      <button
+                        type="button"
+                        className="nav-favorite-item"
+                        key={restaurantId}
+                        onClick={() => goTo(`/restaurant/${restaurantId}`)}
+                      >
+                        <Heart size={16} fill="currentColor" />
+                        <span>{restaurantName}</span>
+                        <ChevronRight size={16} />
+                      </button>
+                    );
+                  })
+                ) : (
+                  <p className="nav-empty-favorites">
+                    Tap the heart on a restaurant to save it here.
+                  </p>
+                )}
+              </div>
+
+              <div className="nav-drawer-actions">
+                <button type="button" onClick={() => goTo("/cart")}>
+                  <ShoppingBagIcon size={18} /> My bag ({cartCount})
+                </button>
+                <button type="button" onClick={onToggleTheme}>
+                  {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+                  {theme === "light" ? "Dark mode" : "Light mode"}
+                </button>
+                <button type="button" className="nav-logout" onClick={handleLogout}>
+                  Logout
+                </button>
+              </div>
+            </aside>
           </div>
         )}
       </div>

@@ -20,6 +20,9 @@ function Body({ isTopRated, setIsTopRated, sortOrder, toggleSort }) {
       let json;
       try {
         response = await fetch(DATA_URL);
+        if (!response.ok) {
+          throw new Error(`Restaurant API returned ${response.status}`);
+        }
         json = await response.json();
         console.debug("fetch response status:", response.status);
         console.debug("raw fetched json:", json);
@@ -28,6 +31,9 @@ function Body({ isTopRated, setIsTopRated, sortOrder, toggleSort }) {
         // fallback to local mock file served from public/mock
         try {
           const mockResp = await fetch("/mock/restaurants.json");
+          if (!mockResp.ok) {
+            throw new Error(`Mock restaurants returned ${mockResp.status}`);
+          }
           json = await mockResp.json();
           console.debug("Loaded local mock restaurants, count:", json.length);
         } catch (mockErr) {
