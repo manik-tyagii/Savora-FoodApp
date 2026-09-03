@@ -538,5 +538,665 @@
       "areaName": "Whitefield",
       "aggregatedDiscountInfoV3": { "header": "Hotpot for Two" }
     }
+  },
+  {
+    "info": {
+      "id": "46",
+      "name": "Cedar Kitchen",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=46",
+      "cuisines": ["Indian", "North Indian"],
+      "avgRating": "4.3",
+      "sla": { "slaString": "26 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "15% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "47",
+      "name": "Basil Bistro",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=47",
+      "cuisines": ["Italian", "Continental"],
+      "avgRating": "4.5",
+      "sla": { "slaString": "32 MINS" },
+      "areaName": "Koramangala",
+      "aggregatedDiscountInfoV3": { "header": "Combo Offer" }
+    }
+  },
+  {
+    "info": {
+      "id": "48",
+      "name": "Dosa District",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=48",
+      "cuisines": ["South Indian"],
+      "avgRating": "4.7",
+      "sla": { "slaString": "21 MINS" },
+      "areaName": "Jayanagar",
+      "aggregatedDiscountInfoV3": { "header": "10% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "49",
+      "name": "The Wok Shop",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=49",
+      "cuisines": ["Chinese", "Asian"],
+      "avgRating": "4.2",
+      "sla": { "slaString": "34 MINS" },
+      "areaName": "MG Road",
+      "aggregatedDiscountInfoV3": { "header": "Free Delivery" }
+    }
+  },
+  {
+    "info": {
+      "id": "50",
+      "name": "Urban Tacos",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=50",
+      "cuisines": ["Mexican", "Fast Food"],
+      "avgRating": "4.1",
+      "sla": { "slaString": "28 MINS" },
+      "areaName": "Whitefield",
+      "aggregatedDiscountInfoV3": { "header": "Buy 1 Get 1" }
+    }
+  },
+  {
+    "info": {
+      "id": "51",
+      "name": "Cocoa Cloud",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=51",
+      "cuisines": ["Desserts", "Bakery"],
+      "avgRating": "4.6",
+      "sla": { "slaString": "19 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "Sweet Deal" }
+    }
+  },
+  {
+    "info": {
+      "id": "52",
+      "name": "Garden Greens",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=52",
+      "cuisines": ["Healthy", "Salads"],
+      "avgRating": "4.4",
+      "sla": { "slaString": "23 MINS" },
+      "areaName": "Koramangala",
+      "aggregatedDiscountInfoV3": { "header": "Healthy Choice" }
+    }
+  },
+  {
+    "info": {
+      "id": "53",
+      "name": "Royal Biryani",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=53",
+      "cuisines": ["Biryani", "Indian"],
+      "avgRating": "4.5",
+      "sla": { "slaString": "36 MINS" },
+      "areaName": "Frazer Town",
+      "aggregatedDiscountInfoV3": { "header": "20% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "54",
+      "name": "Morning Stories",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=54",
+      "cuisines": ["Breakfast", "Cafe"],
+      "avgRating": "4.2",
+      "sla": { "slaString": "17 MINS" },
+      "areaName": "MG Road",
+      "aggregatedDiscountInfoV3": { "header": "Breakfast Combo" }
+    }
+  },
+  {
+    "info": {
+      "id": "55",
+      "name": "Coastal Catch",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=55",
+      "cuisines": ["Seafood"],
+      "avgRating": "4.3",
+      "sla": { "slaString": "42 MINS" },
+      "areaName": "Shivajinagar",
+      "aggregatedDiscountInfoV3": { "header": "Special Platter" }
+    }
+  },
+  {
+    "info": {
+      "id": "56",
+      "name": "Firewood Pizza",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=56",
+      "cuisines": ["Pizza", "Italian"],
+      "avgRating": "4.6",
+      "sla": { "slaString": "29 MINS" },
+      "areaName": "Jayanagar",
+      "aggregatedDiscountInfoV3": { "header": "15% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "57",
+      "name": "Kebab Junction",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=57",
+      "cuisines": ["Kebabs", "Indian"],
+      "avgRating": "4.1",
+      "sla": { "slaString": "31 MINS" },
+      "areaName": "Whitefield",
+      "aggregatedDiscountInfoV3": { "header": "Family Pack" }
+    }
+  },
+  {
+    "info": {
+      "id": "58",
+      "name": "Namma Meals",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=58",
+      "cuisines": ["South Indian", "Vegetarian"],
+      "avgRating": "4.4",
+      "sla": { "slaString": "24 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "10% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "59",
+      "name": "Ramen Room",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=59",
+      "cuisines": ["Japanese", "Noodles"],
+      "avgRating": "4.5",
+      "sla": { "slaString": "38 MINS" },
+      "areaName": "Koramangala",
+      "aggregatedDiscountInfoV3": { "header": "Free Gyoza" }
+    }
+  },
+  {
+    "info": {
+      "id": "60",
+      "name": "Burger Works",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=60",
+      "cuisines": ["Burgers", "Fast Food"],
+      "avgRating": "4.0",
+      "sla": { "slaString": "22 MINS" },
+      "areaName": "MG Road",
+      "aggregatedDiscountInfoV3": { "header": "Combo Deals" }
+    }
+  },
+  {
+    "info": {
+      "id": "61",
+      "name": "Tandoor Tales",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=61",
+      "cuisines": ["Tandoor", "Indian"],
+      "avgRating": "4.2",
+      "sla": { "slaString": "33 MINS" },
+      "areaName": "Jayanagar",
+      "aggregatedDiscountInfoV3": { "header": "Free Dessert" }
+    }
+  },
+  {
+    "info": {
+      "id": "62",
+      "name": "Berry Bakehouse",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=62",
+      "cuisines": ["Bakery", "Desserts"],
+      "avgRating": "4.7",
+      "sla": { "slaString": "18 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "Buy 2 Get 1" }
+    }
+  },
+  {
+    "info": {
+      "id": "63",
+      "name": "The Curry Leaf",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=63",
+      "cuisines": ["Indian", "South Indian"],
+      "avgRating": "4.3",
+      "sla": { "slaString": "27 MINS" },
+      "areaName": "Koramangala",
+      "aggregatedDiscountInfoV3": { "header": "15% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "64",
+      "name": "Saffron Table",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=64",
+      "cuisines": ["North Indian", "Biryani"],
+      "avgRating": "4.6",
+      "sla": { "slaString": "35 MINS" },
+      "areaName": "Whitefield",
+      "aggregatedDiscountInfoV3": { "header": "20% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "65",
+      "name": "Poke Park",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=65",
+      "cuisines": ["Healthy", "Asian"],
+      "avgRating": "4.2",
+      "sla": { "slaString": "26 MINS" },
+      "areaName": "MG Road",
+      "aggregatedDiscountInfoV3": { "header": "Fresh Pick" }
+    }
+  },
+  {
+    "info": {
+      "id": "66",
+      "name": "Chaat Street",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=66",
+      "cuisines": ["Street Food", "Indian"],
+      "avgRating": "4.1",
+      "sla": { "slaString": "20 MINS" },
+      "areaName": "Shivajinagar",
+      "aggregatedDiscountInfoV3": { "header": "Snack Packs" }
+    }
+  },
+  {
+    "info": {
+      "id": "67",
+      "name": "Noodle Nation",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=67",
+      "cuisines": ["Noodles", "Chinese"],
+      "avgRating": "4.4",
+      "sla": { "slaString": "30 MINS" },
+      "areaName": "Jayanagar",
+      "aggregatedDiscountInfoV3": { "header": "Free Drink" }
+    }
+  },
+  {
+    "info": {
+      "id": "68",
+      "name": "Green Bowl",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=68",
+      "cuisines": ["Salads", "Vegetarian"],
+      "avgRating": "4.0",
+      "sla": { "slaString": "21 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "Healthy Choice" }
+    }
+  },
+  {
+    "info": {
+      "id": "69",
+      "name": "Mango Tree Cafe",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=69",
+      "cuisines": ["Cafe", "Continental"],
+      "avgRating": "4.5",
+      "sla": { "slaString": "25 MINS" },
+      "areaName": "Koramangala",
+      "aggregatedDiscountInfoV3": { "header": "Cafe Combo" }
+    }
+  },
+  {
+    "info": {
+      "id": "70",
+      "name": "Grill Theory",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=70",
+      "cuisines": ["BBQ", "Fast Food"],
+      "avgRating": "4.3",
+      "sla": { "slaString": "37 MINS" },
+      "areaName": "Whitefield",
+      "aggregatedDiscountInfoV3": { "header": "Family Pack" }
+    }
+  },
+  {
+    "info": {
+      "id": "71",
+      "name": "Taco Town",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=71",
+      "cuisines": ["Tacos", "Mexican"],
+      "avgRating": "4.2",
+      "sla": { "slaString": "24 MINS" },
+      "areaName": "MG Road",
+      "aggregatedDiscountInfoV3": { "header": "Buy 1 Get 1" }
+    }
+  },
+  {
+    "info": {
+      "id": "72",
+      "name": "Sushi Stories",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=72",
+      "cuisines": ["Sushi", "Japanese"],
+      "avgRating": "4.6",
+      "sla": { "slaString": "41 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "20% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "73",
+      "name": "The Lunch Box",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=73",
+      "cuisines": ["Indian", "North Indian"],
+      "avgRating": "4.0",
+      "sla": { "slaString": "23 MINS" },
+      "areaName": "Jayanagar",
+      "aggregatedDiscountInfoV3": { "header": "Lunch Combo" }
+    }
+  },
+  {
+    "info": {
+      "id": "74",
+      "name": "Pasta Piazza",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=74",
+      "cuisines": ["Pasta", "Italian"],
+      "avgRating": "4.4",
+      "sla": { "slaString": "28 MINS" },
+      "areaName": "Koramangala",
+      "aggregatedDiscountInfoV3": { "header": "15% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "75",
+      "name": "Kheer House",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=75",
+      "cuisines": ["Desserts", "Indian"],
+      "avgRating": "4.5",
+      "sla": { "slaString": "20 MINS" },
+      "areaName": "Shivajinagar",
+      "aggregatedDiscountInfoV3": { "header": "Sweet Deal" }
+    }
+  },
+  {
+    "info": {
+      "id": "76",
+      "name": "Harvest Cafe",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=76",
+      "cuisines": ["Cafe", "Healthy"],
+      "avgRating": "4.1",
+      "sla": { "slaString": "19 MINS" },
+      "areaName": "Whitefield",
+      "aggregatedDiscountInfoV3": { "header": "Fresh Pick" }
+    }
+  },
+  {
+    "info": {
+      "id": "77",
+      "name": "Spice Canvas",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=77",
+      "cuisines": ["Indian", "Asian"],
+      "avgRating": "4.3",
+      "sla": { "slaString": "34 MINS" },
+      "areaName": "MG Road",
+      "aggregatedDiscountInfoV3": { "header": "Chef Special" }
+    }
+  },
+  {
+    "info": {
+      "id": "78",
+      "name": "Wrap Nation",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=78",
+      "cuisines": ["Wraps", "Fast Food"],
+      "avgRating": "4.2",
+      "sla": { "slaString": "22 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "Combo Deals" }
+    }
+  },
+  {
+    "info": {
+      "id": "79",
+      "name": "Rice & Spice",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=79",
+      "cuisines": ["Biryani", "Indian"],
+      "avgRating": "4.6",
+      "sla": { "slaString": "39 MINS" },
+      "areaName": "Koramangala",
+      "aggregatedDiscountInfoV3": { "header": "20% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "80",
+      "name": "Oven Fresh",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=80",
+      "cuisines": ["Bakery", "Pizza"],
+      "avgRating": "4.4",
+      "sla": { "slaString": "27 MINS" },
+      "areaName": "Jayanagar",
+      "aggregatedDiscountInfoV3": { "header": "Free Delivery" }
+    }
+  },
+  {
+    "info": {
+      "id": "81",
+      "name": "Dumpling Den",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=81",
+      "cuisines": ["Asian", "Chinese"],
+      "avgRating": "4.3",
+      "sla": { "slaString": "31 MINS" },
+      "areaName": "Whitefield",
+      "aggregatedDiscountInfoV3": { "header": "Free Drink" }
+    }
+  },
+  {
+    "info": {
+      "id": "82",
+      "name": "Protein Plate",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=82",
+      "cuisines": ["Healthy", "Continental"],
+      "avgRating": "4.1",
+      "sla": { "slaString": "29 MINS" },
+      "areaName": "MG Road",
+      "aggregatedDiscountInfoV3": { "header": "Healthy Choice" }
+    }
+  },
+  {
+    "info": {
+      "id": "83",
+      "name": "Bombay Bites",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=83",
+      "cuisines": ["Street Food", "Indian"],
+      "avgRating": "4.0",
+      "sla": { "slaString": "18 MINS" },
+      "areaName": "Shivajinagar",
+      "aggregatedDiscountInfoV3": { "header": "Snack Packs" }
+    }
+  },
+  {
+    "info": {
+      "id": "84",
+      "name": "Mediterranean Moon",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=84",
+      "cuisines": ["Mediterranean", "Healthy"],
+      "avgRating": "4.5",
+      "sla": { "slaString": "36 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "15% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "85",
+      "name": "Chai & Co",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=85",
+      "cuisines": ["Cafe", "Snacks"],
+      "avgRating": "4.2",
+      "sla": { "slaString": "16 MINS" },
+      "areaName": "Koramangala",
+      "aggregatedDiscountInfoV3": { "header": "Tea Time Deal" }
+    }
+  },
+  {
+    "info": {
+      "id": "86",
+      "name": "Dragon Bowl",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=86",
+      "cuisines": ["Chinese", "Noodles"],
+      "avgRating": "4.4",
+      "sla": { "slaString": "33 MINS" },
+      "areaName": "Whitefield",
+      "aggregatedDiscountInfoV3": { "header": "Combo Offer" }
+    }
+  },
+  {
+    "info": {
+      "id": "87",
+      "name": "Chickpea Corner",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=87",
+      "cuisines": ["Middle Eastern", "Healthy"],
+      "avgRating": "4.3",
+      "sla": { "slaString": "25 MINS" },
+      "areaName": "Jayanagar",
+      "aggregatedDiscountInfoV3": { "header": "10% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "88",
+      "name": "Cheese Please",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=88",
+      "cuisines": ["Pizza", "Fast Food"],
+      "avgRating": "4.1",
+      "sla": { "slaString": "30 MINS" },
+      "areaName": "MG Road",
+      "aggregatedDiscountInfoV3": { "header": "Buy 1 Get 1" }
+    }
+  },
+  {
+    "info": {
+      "id": "89",
+      "name": "Coconut Grove",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=89",
+      "cuisines": ["South Indian", "Vegetarian"],
+      "avgRating": "4.6",
+      "sla": { "slaString": "24 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "Free Dessert" }
+    }
+  },
+  {
+    "info": {
+      "id": "90",
+      "name": "Pancake Parade",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=90",
+      "cuisines": ["Breakfast", "Desserts"],
+      "avgRating": "4.5",
+      "sla": { "slaString": "21 MINS" },
+      "areaName": "Koramangala",
+      "aggregatedDiscountInfoV3": { "header": "Breakfast Combo" }
+    }
+  },
+  {
+    "info": {
+      "id": "91",
+      "name": "Flame & Fork",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=91",
+      "cuisines": ["BBQ", "Continental"],
+      "avgRating": "4.2",
+      "sla": { "slaString": "40 MINS" },
+      "areaName": "Whitefield",
+      "aggregatedDiscountInfoV3": { "header": "Family Pack" }
+    }
+  },
+  {
+    "info": {
+      "id": "92",
+      "name": "Thai Garden",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=92",
+      "cuisines": ["Thai", "Asian"],
+      "avgRating": "4.4",
+      "sla": { "slaString": "35 MINS" },
+      "areaName": "Jayanagar",
+      "aggregatedDiscountInfoV3": { "header": "15% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "93",
+      "name": "The Salad Bar",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=93",
+      "cuisines": ["Salads", "Healthy"],
+      "avgRating": "4.0",
+      "sla": { "slaString": "20 MINS" },
+      "areaName": "MG Road",
+      "aggregatedDiscountInfoV3": { "header": "Fresh Pick" }
+    }
+  },
+  {
+    "info": {
+      "id": "94",
+      "name": "Momo Market",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=94",
+      "cuisines": ["Tibetan", "Asian"],
+      "avgRating": "4.3",
+      "sla": { "slaString": "26 MINS" },
+      "areaName": "Shivajinagar",
+      "aggregatedDiscountInfoV3": { "header": "Free Dip" }
+    }
+  },
+  {
+    "info": {
+      "id": "95",
+      "name": "Curry & Crust",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=95",
+      "cuisines": ["Indian", "Pizza"],
+      "avgRating": "4.1",
+      "sla": { "slaString": "32 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "Combo Offer" }
+    }
+  },
+  {
+    "info": {
+      "id": "96",
+      "name": "Blueberry Bliss",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=96",
+      "cuisines": ["Desserts", "Bakery"],
+      "avgRating": "4.7",
+      "sla": { "slaString": "17 MINS" },
+      "areaName": "Koramangala",
+      "aggregatedDiscountInfoV3": { "header": "Sweet Deal" }
+    }
+  },
+  {
+    "info": {
+      "id": "97",
+      "name": "Bowlful",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=97",
+      "cuisines": ["Rice Bowls", "Healthy"],
+      "avgRating": "4.2",
+      "sla": { "slaString": "28 MINS" },
+      "areaName": "Whitefield",
+      "aggregatedDiscountInfoV3": { "header": "10% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "98",
+      "name": "Tandoori Square",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=98",
+      "cuisines": ["Tandoor", "Kebabs"],
+      "avgRating": "4.5",
+      "sla": { "slaString": "34 MINS" },
+      "areaName": "Jayanagar",
+      "aggregatedDiscountInfoV3": { "header": "20% OFF" }
+    }
+  },
+  {
+    "info": {
+      "id": "99",
+      "name": "Pasta & More",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=99",
+      "cuisines": ["Pasta", "Continental"],
+      "avgRating": "4.3",
+      "sla": { "slaString": "27 MINS" },
+      "areaName": "MG Road",
+      "aggregatedDiscountInfoV3": { "header": "Free Delivery" }
+    }
+  },
+  {
+    "info": {
+      "id": "100",
+      "name": "Savora Select",
+      "imageUrl": "https://loremflickr.com/400/300/food?lock=100",
+      "cuisines": ["Multi Cuisine", "Indian"],
+      "avgRating": "4.6",
+      "sla": { "slaString": "30 MINS" },
+      "areaName": "Indiranagar",
+      "aggregatedDiscountInfoV3": { "header": "Chef's Choice" }
+    }
   }
 ]

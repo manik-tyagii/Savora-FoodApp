@@ -3,7 +3,17 @@ import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { DATA_URL } from "../utils/constant";
 import RestaurantCard from "./RestaurantCard";
-import { ArrowDownUp, Search, Star, X } from "lucide-react";
+import {
+  ArrowDownUp,
+  ChevronLeft,
+  ChevronRight,
+  Search,
+  Star,
+  X,
+} from "lucide-react";
+
+const RESTAURANTS_PER_PAGE = 40;
+const MAX_RESTAURANTS = 100;
 
 function Body({ isTopRated, setIsTopRated, sortOrder, toggleSort }) {
   const location = useLocation();
@@ -11,6 +21,7 @@ function Body({ isTopRated, setIsTopRated, sortOrder, toggleSort }) {
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const activeCuisine = useSelector((state) => state.restaurants.activeCuisine);
 
   const fetchData = async () => {
@@ -75,8 +86,10 @@ function Body({ isTopRated, setIsTopRated, sortOrder, toggleSort }) {
         "extracted restaurants count:",
         Array.isArray(data) ? data.length : 0,
       );
-      setResList(data);
-      setFilteredRestaurant(data); // populate filtered list immediately
+      setResList(Array.isArray(data) ? data.slice(0, MAX_RESTAURANTS) : []);
+      setFilteredRestaurant(
+        Array.isArray(data) ? data.slice(0, MAX_RESTAURANTS) : [],
+      );
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -142,7 +155,16 @@ function Body({ isTopRated, setIsTopRated, sortOrder, toggleSort }) {
       });
     }
     setFilteredRestaurant(updatedList);
+    setCurrentPage(1);
   }, [search, isTopRated, resList, activeCuisine, sortOrder]);
+
+  const totalPages = Math.ceil(
+    filteredRestaurant.length / RESTAURANTS_PER_PAGE,
+  );
+  const visibleRestaurants = filteredRestaurant.slice(
+    (currentPage - 1) * RESTAURANTS_PER_PAGE,
+    currentPage * RESTAURANTS_PER_PAGE,
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
@@ -211,10 +233,40 @@ function Body({ isTopRated, setIsTopRated, sortOrder, toggleSort }) {
       ) : (
         <div id="restaurants">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {filteredRestaurant.map((e) => (
+            {visibleRestaurants.map((e) => (
               <RestaurantCard key={e?.info?.id} res={e} />
             ))}
           </div>
+          {totalPages > 1 && (
+            <nav
+              className="mt-8 flex items-center justify-center gap-3"
+              aria-label="Restaurant pages"
+            >
+              <button
+                type="button"
+                className="filter-pill"
+                onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+                disabled={currentPage === 1}
+                aria-label="Previous restaurant page"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <span className="text-sm font-medium text-gray-700">
+                Page {currentPage} of {totalPages}
+              </span>
+              <button
+                type="button"
+                className="filter-pill"
+                onClick={() =>
+                  setCurrentPage((page) => Math.min(totalPages, page + 1))
+                }
+                disabled={currentPage === totalPages}
+                aria-label="Next restaurant page"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </nav>
+          )}
         </div>
       )}
     </div>
