@@ -1,10 +1,10 @@
 import Body from "./Body";
 import Section1 from "./Section1";
+import Sidebar from "./Sidebar";
 
 function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-
       {/* Hero / Section1 */}
       <Section1 />
 
@@ -14,10 +14,14 @@ function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1">
-        <Body />
+      <div className="home-content flex-1">
+        <div className="mx-auto flex max-w-7xl items-start gap-2 px-2 sm:gap-5 sm:px-4 lg:px-6">
+          <div className="min-w-0 flex-1">
+            <Body />
+          </div>
+          <Sidebar />
+        </div>
       </div>
-
     </div>
   );
 }

@@ -1,0 +1,40 @@
+<svg width="1200" height="150" viewBox="0 0 1200 150" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="road" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#263746" />
+      <stop offset="1" stop-color="#111820" />
+    </linearGradient>
+    <style>
+      .delivery-trip { animation: travel 8s linear infinite; }
+      .wheel { animation: spin .45s linear infinite; transform-origin: center; }
+      .parcel { animation: parcel-bounce .7s ease-in-out infinite; transform-origin: center; }
+      @keyframes travel { from { transform: translateX(-240px); } to { transform: translateX(1240px); } }
+      @keyframes spin { to { transform: rotate(360deg); } }
+      @keyframes parcel-bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+    </style>
+  </defs>
+  <rect y="77" width="1200" height="73" fill="url(#road)" opacity=".94" />
+  <path d="M0 78h1200" stroke="#f6bd60" stroke-width="3" stroke-opacity=".62" />
+  <path d="M0 121h1200" stroke="#f8f4ea" stroke-width="4" stroke-dasharray="34 28" stroke-opacity=".58" />
+  <g opacity=".65" fill="#f6bd60">
+    <circle cx="110" cy="59" r="3" /><circle cx="380" cy="42" r="2" /><circle cx="760" cy="57" r="3" /><circle cx="1060" cy="39" r="2" />
+  </g>
+  <g class="delivery-trip">
+    <path d="M22 73h52" stroke="#f8f4ea" stroke-width="3" stroke-linecap="round" opacity=".7" />
+    <path d="M4 85h48" stroke="#f8f4ea" stroke-width="3" stroke-linecap="round" opacity=".45" />
+    <circle cx="84" cy="112" r="18" fill="#111820" stroke="#f6bd60" stroke-width="4" />
+    <circle cx="150" cy="112" r="18" fill="#111820" stroke="#f6bd60" stroke-width="4" />
+    <g class="wheel" stroke="#f8f4ea" stroke-width="2"><path d="M84 96v32M68 112h32M150 96v32M134 112h32" /></g>
+    <path d="M84 112l22-34 22 34zM106 78h44l-20 34" fill="none" stroke="#2a9d8f" stroke-width="6" stroke-linejoin="round" />
+    <path d="M106 76l-12-24" stroke="#f8f4ea" stroke-width="6" stroke-linecap="round" />
+    <rect x="61" y="51" width="30" height="33" rx="6" fill="#173f5f" stroke="#f6bd60" stroke-width="2" />
+    <path d="M66 54c-5 8-5 18-1 25M86 54c5 8 5 18 1 25" fill="none" stroke="#102f49" stroke-width="3" />
+    <text x="65" y="70" fill="#f8f4ea" font-size="5.5" font-weight="700" font-family="Arial, sans-serif">SAVORA</text>
+    <circle cx="91" cy="38" r="13" fill="#d99b70" />
+    <path d="M79 37c2-15 20-18 27-4" stroke="#171619" stroke-width="7" stroke-linecap="round" />
+    <path d="M86 51l22 4 10 24H94z" fill="#e76f51" stroke="#f8f4ea" stroke-width="3" />
+    <path d="M104 55l22 16" stroke="#f8f4ea" stroke-width="6" stroke-linecap="round" />
+    <g class="parcel"><rect x="123" y="48" width="31" height="25" rx="3" fill="#f6bd60" stroke="#f8f4ea" stroke-width="2" /><path d="M138 49v23M124 59h29" stroke="#b76b3d" stroke-width="2" /></g>
+    <path d="M104 78l-4 33M129 78l12 33" stroke="#d99b70" stroke-width="5" stroke-linecap="round" />
+  </g>
+</svg>

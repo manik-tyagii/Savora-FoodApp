@@ -10,6 +10,7 @@ function RestaurantDetail() {
   const dispatch = useDispatch();
   const { list, loading } = useSelector((state) => state.restaurants);
   const [menu, setMenu] = useState([]);
+  const [addedItem, setAddedItem] = useState("");
 
   useEffect(() => {
     if (!list || list.length === 0) dispatch(fetchRestaurants());
@@ -18,7 +19,28 @@ function RestaurantDetail() {
     fetch("/mock/menus.json")
       .then((r) => r.json())
       .then((data) => {
-        setMenu(data[id] || []);
+        setMenu(
+          data[id] || [
+            {
+              id: `${id}-1`,
+              name: "Chef's Special Platter",
+              description: "A generous serving made fresh to order.",
+              price: 229,
+            },
+            {
+              id: `${id}-2`,
+              name: "Signature House Bowl",
+              description: "Our most-loved bowl with seasonal ingredients.",
+              price: 179,
+            },
+            {
+              id: `${id}-3`,
+              name: "Something Sweet",
+              description: "A little dessert to finish on a delicious note.",
+              price: 99,
+            },
+          ],
+        );
       })
       .catch(() => setMenu([]));
   }, [dispatch, list, id]);
@@ -35,45 +57,101 @@ function RestaurantDetail() {
     const cached = localStorage.getItem(aiKey);
     if (cached) fallbackAi = cached;
     else {
-      const generated = generateAIDishImage({ name: restaurant.info.name, cuisines: restaurant.info.cuisines, id: restaurant.info.id, width: 1200, height: 900 });
+      const generated = generateAIDishImage({
+        name: restaurant.info.name,
+        cuisines: restaurant.info.cuisines,
+        id: restaurant.info.id,
+        width: 1200,
+        height: 900,
+      });
       if (generated) {
         fallbackAi = generated;
-        try { localStorage.setItem(aiKey, generated); } catch(e) {}
+        try {
+          localStorage.setItem(aiKey, generated);
+        } catch {
+          fallbackAi = generated;
+        }
       }
     }
-  } catch (err) {
-    fallbackAi = generateAIDishImage({ name: restaurant.info.name, cuisines: restaurant.info.cuisines, id: restaurant.info.id });
+  } catch {
+    fallbackAi = generateAIDishImage({
+      name: restaurant.info.name,
+      cuisines: restaurant.info.cuisines,
+      id: restaurant.info.id,
+    });
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="flex gap-6">
-        <img src={restaurant.info.imageUrl || fallbackAi} alt={restaurant.info.name} className="w-64 h-44 object-cover rounded" />
-        <div>
-          <h2 className="text-2xl font-bold">{restaurant.info.name}</h2>
-          <p className="text-sm text-gray-600">{restaurant.info.cuisines.join(", ")}</p>
-          <p className="mt-2">Rating: {restaurant.info.avgRating} • {restaurant.info.sla?.slaString}</p>
-          <p className="mt-2 text-sm text-green-600">{restaurant.info.aggregatedDiscountInfoV3?.header}</p>
+    <div className="max-w-5xl mx-auto px-4 py-6 sm:px-6 sm:py-10">
+      <div className="detail-hero surface-panel flex flex-col gap-6 p-4 sm:flex-row sm:p-6">
+        <img
+          src={restaurant.info.imageUrl || fallbackAi}
+          alt={restaurant.info.name}
+          className="h-56 w-full rounded-2xl object-cover sm:h-64 sm:w-2/5"
+        />
+        <div className="flex flex-1 flex-col justify-center">
+          <p className="eyebrow">Curated for your table</p>
+          <h2 className="mt-2 text-3xl font-bold sm:text-4xl">
+            {restaurant.info.name}
+          </h2>
+          <p className="text-sm text-gray-600">
+            {restaurant.info.cuisines.join(", ")}
+          </p>
+          <p className="mt-4 flex flex-wrap gap-2 text-sm">
+            <span className="status-pill">★ {restaurant.info.avgRating}</span>
+            <span className="info-pill">
+              ⌁ {restaurant.info.sla?.slaString || "30 MINS"}
+            </span>
+            <span className="info-pill">
+              ⌖ {restaurant.info.areaName || "Bengaluru"}
+            </span>
+          </p>
+          <p className="mt-2 text-sm text-green-600">
+            {restaurant.info.aggregatedDiscountInfoV3?.header}
+          </p>
         </div>
       </div>
 
-      <section className="mt-6">
-        <h3 className="text-xl font-semibold mb-3">Menu</h3>
-        {menu.length === 0 && <p className="text-sm text-gray-600">No menu available.</p>}
+      <section className="mt-8">
+        <div className="mb-4 flex items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Made to order</p>
+            <h3 className="mt-1 text-2xl font-bold">Today&apos;s menu</h3>
+          </div>
+          <span className="text-sm text-gray-600">{menu.length} picks</span>
+        </div>
+        {menu.length === 0 && (
+          <p className="text-sm text-gray-600">No menu available.</p>
+        )}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {menu.map((item) => (
-            <div key={item.id} className="p-4 border rounded flex justify-between items-center">
-              <div>
+            <div
+              key={item.id}
+              className="menu-item surface-panel flex items-center justify-between gap-4 rounded-2xl border p-4"
+            >
+              <div className="min-w-0">
                 <div className="font-semibold">{item.name}</div>
                 <div className="text-sm text-gray-600">{item.description}</div>
               </div>
               <div className="flex flex-col items-end">
                 <div className="font-bold">₹{item.price}</div>
                 <button
-                  onClick={() => dispatch(addItem({ id: item.id, name: item.name, price: item.price, qty: 1 }))}
-                  className="mt-2 bg-green-600 text-white px-3 py-1 rounded"
+                  onClick={() => {
+                    dispatch(
+                      addItem({
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        qty: 1,
+                        restaurantId: id,
+                      }),
+                    );
+                    setAddedItem(item.id);
+                    setTimeout(() => setAddedItem(""), 1400);
+                  }}
+                  className="accent-button mt-2 rounded-xl px-4 py-2 text-sm font-bold text-white"
                 >
-                  Add
+                  {addedItem === item.id ? "Added ✓" : "Add +"}
                 </button>
               </div>
             </div>

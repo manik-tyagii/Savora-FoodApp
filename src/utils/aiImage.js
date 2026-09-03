@@ -40,18 +40,43 @@ const patternSvgs = [
   `,
 ];
 
-export default function generateAIDishImage({ name = "Food", cuisines = [], id = "0", width = 1200, height = 900 } = {}) {
+export default function generateAIDishImage({
+  name = "Food",
+  cuisines = [],
+  id = "0",
+  width = 1200,
+  height = 900,
+} = {}) {
   try {
-    const base = `${name} ${(cuisines || []).join(' ')}`.trim();
+    const base = `${name} ${(cuisines || []).join(" ")}`.trim();
     const h = hashString(base + id);
     const p = palettes[h % palettes.length];
     const pat = patternSvgs[h % patternSvgs.length];
 
-    const emojiOptions = ['🍕','🍔','🍣','🥗','🍜','🍛','🍩','🍰','🥐','🥟','🍝','🥘'];
+    const emojiOptions = [
+      "🍕",
+      "🍔",
+      "🍣",
+      "🥗",
+      "🍜",
+      "🍛",
+      "🍩",
+      "🍰",
+      "🥐",
+      "🥟",
+      "🍝",
+      "🥘",
+    ];
     const emoji = emojiOptions[h % emojiOptions.length];
 
-    const title = (name || 'Food').replace(/&/g, '&amp;').replace(/</g, '&lt;');
-    const subtitle = (cuisines && cuisines.length ? cuisines.slice(0,2).join(', ') : 'Delicious').replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const title = (name || "Food").replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    const subtitle = (
+      cuisines && cuisines.length
+        ? cuisines.slice(0, 2).join(", ")
+        : "Delicious"
+    )
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;");
 
     const svg = `
 <svg xmlns='http://www.w3.org/2000/svg' width='${width}' height='${height}' viewBox='0 0 ${width} ${height}'>
@@ -67,23 +92,24 @@ export default function generateAIDishImage({ name = "Food", cuisines = [], id =
     </filter>
   </defs>
   <rect width='100%' height='100%' fill='url(#p)' />
-  <rect x='40' y='40' width='${width-80}' height='${height-160}' rx='24' fill='url(#g)' filter='url(#soft)' />
+  <rect x='40' y='40' width='${width - 80}' height='${height - 160}' rx='24' fill='url(#g)' filter='url(#soft)' />
 
   <g font-family='Segoe UI, Roboto, Arial, Helvetica, sans-serif'>
     <text x='80' y='220' font-size='160' fill='rgba(255,255,255,0.95)'>${emoji}</text>
     <text x='80' y='360' font-size='72' fill='rgba(255,255,255,0.98)' font-weight='700'>${title}</text>
     <text x='80' y='430' font-size='36' fill='rgba(255,255,255,0.9)'>${subtitle}</text>
 
-    <g transform='translate(80,${height-120})'>
-      <rect x='0' y='0' width='${width-320}' height='96' rx='12' fill='rgba(0,0,0,0.18)' />
+    <g transform='translate(80,${height - 120})'>
+      <rect x='0' y='0' width='${width - 320}' height='96' rx='12' fill='rgba(0,0,0,0.18)' />
       <text x='24' y='64' font-size='28' fill='rgba(255,255,255,0.95)'>AI-generated preview</text>
     </g>
   </g>
 </svg>`;
 
-    const encoded = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+    const encoded =
+      "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
     return encoded;
-  } catch (err) {
+  } catch {
     return null;
   }
 }

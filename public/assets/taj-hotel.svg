@@ -1,0 +1,33 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#203b59" /><stop offset="1" stop-color="#8b4934" /></linearGradient>
+    <linearGradient id="stone" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#f2d5a4" /><stop offset="1" stop-color="#b87955" /></linearGradient>
+    <linearGradient id="window" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#1a3349" /><stop offset="1" stop-color="#08141d" /></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" /></filter>
+    <style>
+      .lamp { animation: glow 2s ease-in-out infinite alternate; }
+      @keyframes glow { from { opacity: .6; } to { opacity: 1; } }
+    </style>
+  </defs>
+  <rect width="640" height="360" rx="28" fill="url(#sky)" />
+  <circle cx="100" cy="76" r="42" fill="#f6bd60" opacity=".15" filter="url(#glow)" />
+  <circle cx="535" cy="92" r="55" fill="#e76f51" opacity=".14" filter="url(#glow)" />
+  <path d="M0 278h640v82H0z" fill="#14222d" />
+  <path d="M68 278V161h504v117z" fill="url(#stone)" stroke="#f8e6c7" stroke-width="3" />
+  <path d="M42 162h556l-31-35H73z" fill="#e5bd82" stroke="#f8e6c7" stroke-width="3" />
+  <path d="M184 127c3-57 28-87 61-105 33 18 58 48 61 105z" fill="url(#stone)" stroke="#f8e6c7" stroke-width="3" />
+  <path d="M245 22V8M238 12h12" stroke="#f8e6c7" stroke-width="3" stroke-linecap="round" />
+  <path d="M223 127c1-37 10-59 22-70 12 11 21 33 22 70z" fill="#203b59" stroke="#f8e6c7" stroke-width="3" />
+  <path d="M202 133h86" stroke="#e76f51" stroke-width="5" />
+  <text x="245" y="113" text-anchor="middle" fill="#f8f4ea" font-family="Georgia, serif" font-size="17" font-weight="700" letter-spacing="2">TAJ HOTEL</text>
+  <g fill="url(#window)" stroke="#f6bd60" stroke-width="3">
+    <path d="M91 211c0-27 19-47 39-47s39 20 39 47v38H91z" />
+    <path d="M213 211c0-27 19-47 39-47s39 20 39 47v38H213z" />
+    <path d="M335 211c0-27 19-47 39-47s39 20 39 47v38H335z" />
+    <path d="M457 211c0-27 19-47 39-47s39 20 39 47v38H457z" />
+  </g>
+  <g class="lamp" fill="#f6bd60"><circle cx="76" cy="153" r="5" /><circle cx="564" cy="153" r="5" /><circle cx="184" cy="155" r="4" /><circle cx="306" cy="155" r="4" /><circle cx="428" cy="155" r="4" /></g>
+  <path d="M40 278h560" stroke="#f6bd60" stroke-width="5" />
+  <path d="M92 300h456" stroke="#f8f4ea" stroke-opacity=".4" stroke-width="3" stroke-dasharray="18 18" />
+  <text x="320" y="337" text-anchor="middle" fill="#f6bd60" font-family="Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="4">A ROYAL TABLE AWAITS</text>
+</svg>

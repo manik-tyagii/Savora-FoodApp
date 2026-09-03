@@ -1,0 +1,67 @@
+<svg width="220" height="220" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="kitchen" cx="50%" cy="35%">
+      <stop offset="0" stop-color="#2a211d" />
+      <stop offset="1" stop-color="#2a211d" />
+    </radialGradient>
+    <linearGradient id="skin" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#d99b70" />
+      <stop offset="1" stop-color="#a9674a" />
+    </linearGradient>
+    <linearGradient id="jacket" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8f4ea" />
+      <stop offset="1" stop-color="#c6d1d5" />
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" /></filter>
+    <style>
+      .steam { animation: rise 1.8s ease-in-out infinite; transform-origin: center; }
+      .eye-track { animation: glance 2.8s ease-in-out infinite; }
+      @keyframes rise { 0%, 100% { opacity: .2; transform: translateY(4px); } 50% { opacity: .85; transform: translateY(-6px); } }
+      @keyframes glance { 0%, 18% { transform: translateX(0); } 38%, 56% { transform: translateX(3px); } 76%, 88% { transform: translateX(-3px); } 100% { transform: translateX(0); } }
+    </style>
+  </defs>
+
+  <rect width="220" height="220" rx="34" fill="url(#kitchen)" />
+
+  <path d="M57 213c5-40 22-62 53-68h23c31 6 48 28 53 68z" fill="url(#jacket)" stroke="#e7d9c7" stroke-width="2" />
+  <path d="M101 148l20 22 20-22" fill="#e76f51" />
+  <path d="M121 170v43M108 173l13 12 13-12" stroke="#173f5f" stroke-width="2" fill="none" />
+  <circle cx="121" cy="187" r="3" fill="#173f5f" />
+  <circle cx="121" cy="202" r="3" fill="#173f5f" />
+
+  <path d="M68 154c-15 11-23 27-27 44" stroke="#f8f4ea" stroke-width="14" stroke-linecap="round" />
+  <path d="M174 154c13 10 21 22 26 37" stroke="#f8f4ea" stroke-width="14" stroke-linecap="round" />
+  <circle cx="40" cy="199" r="9" fill="url(#skin)" />
+  <circle cx="201" cy="194" r="9" fill="url(#skin)" />
+
+  <path d="M77 76c0-25 19-43 44-43s44 18 44 43v48c0 26-20 43-44 43s-44-17-44-43z" fill="url(#skin)" stroke="#8e5742" stroke-width="2" />
+  <path d="M79 82c-6-34 14-57 44-57 28 0 45 20 42 54-11-16-24-25-43-26-19-1-32 9-43 29z" fill="#171619" />
+  <path d="M88 48c12-13 30-18 50-12" stroke="#5a4a45" stroke-width="5" stroke-linecap="round" />
+  <path d="M91 82c7-5 15-5 22-1M130 81c8-4 16-4 23 1" stroke="#2f2423" stroke-width="4" stroke-linecap="round" />
+  <circle cx="106" cy="91" r="5" fill="#fff" /><circle cx="139" cy="91" r="5" fill="#fff" />
+  <g class="eye-track">
+    <circle cx="107" cy="92" r="2.5" fill="#17202a" /><circle cx="140" cy="92" r="2.5" fill="#17202a" />
+  </g>
+  <path d="M120 94l-4 16 7 2" stroke="#915838" stroke-width="2.5" fill="none" stroke-linecap="round" />
+  <path d="M96 119c7 5 15 7 25 7s18-2 25-7" stroke="#b87955" stroke-width="1.5" stroke-linecap="round" opacity=".7" />
+  <path d="M109 127c7 4 15 4 22 0" stroke="#8f4939" stroke-width="2.5" stroke-linecap="round" />
+
+  <path d="M73 55c-4-20 9-36 25-39 7-12 22-13 29-2 15-5 30 7 28 23 10 7 7 20-2 25-16-10-35-15-54-12-10 1-18 4-26 5z" fill="#f8f4ea" stroke="#dce5e5" stroke-width="2" />
+  <path d="M86 47h74" stroke="#e76f51" stroke-width="5" stroke-linecap="round" />
+
+  <g class="dining-table">
+    <rect x="22" y="181" width="176" height="13" rx="6" fill="#6f4030" stroke="#f6bd60" stroke-width="2" />
+    <path d="M31 194h158l-10 19H41z" fill="#3a2521" stroke="#6f4030" stroke-width="2" />
+    <path d="M47 197v16M173 197v16" stroke="#f6bd60" stroke-opacity=".35" stroke-width="3" />
+    <ellipse cx="139" cy="178" rx="31" ry="7" fill="#f8f4ea" stroke="#d7bfa2" stroke-width="2" />
+    <ellipse cx="139" cy="176" rx="22" ry="4.5" fill="#e76f51" />
+    <circle cx="130" cy="175" r="3" fill="#f6bd60" />
+    <circle cx="140" cy="173" r="3" fill="#2a9d8f" />
+    <circle cx="149" cy="176" r="3" fill="#f6bd60" />
+  </g>
+  <g class="steam" fill="none" stroke="#f8f4ea" stroke-width="3" stroke-linecap="round">
+    <path d="M128 169c-8-10 7-13 0-24" />
+    <path d="M140 168c-8-10 7-14 0-26" />
+    <path d="M152 169c-8-10 7-13 0-24" />
+  </g>
+</svg>

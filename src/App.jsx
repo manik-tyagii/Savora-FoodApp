@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -13,18 +14,32 @@ import Checkout from "./components/Checkout";
 function App() {
   const location = useLocation();
   const { user } = useSelector((state) => state.auth);
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("savora-theme") || "dark",
+  );
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("savora-theme", theme);
+  }, [theme]);
 
   const hideLayoutRoutes = ["/login", "/signup"];
   const shouldHideLayout = hideLayoutRoutes.includes(location.pathname);
 
   return (
     <div className="flex flex-col min-h-screen">
-
       {/* Navbar */}
-      {user && !shouldHideLayout && <Navbar />}
+      {user && !shouldHideLayout && (
+        <Navbar
+          theme={theme}
+          onToggleTheme={() =>
+            setTheme((current) => (current === "light" ? "dark" : "light"))
+          }
+        />
+      )}
 
       {/* Main Content */}
-      <div className="flex-1">
+      <div className="flex-1 savora-main">
         <Routes>
           <Route
             path="/login"
@@ -65,7 +80,6 @@ function App() {
 
       {/* Footer */}
       {user && !shouldHideLayout && <Footer />}
-
     </div>
   );
 }

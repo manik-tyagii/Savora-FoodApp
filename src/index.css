@@ -1,1 +1,821 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap");
 @import "tailwindcss";
+
+:root {
+  --savora-bg: #fffaf4;
+  --savora-surface: #ffffff;
+  --savora-text: #2d211c;
+  --savora-muted: #6b5c54;
+  --savora-border: #eadfd7;
+  --savora-shadow: rgba(108, 61, 28, 0.12);
+  --savora-navy: #173f5f;
+  --savora-saffron: #f4a261;
+  --savora-coral: #e76f51;
+  --savora-mint: #2a9d8f;
+}
+
+:root[data-theme="dark"] {
+  --savora-bg: #1d1714;
+  --savora-surface: #2a211d;
+  --savora-text: #fff5e9;
+  --savora-muted: #cdbdb0;
+  --savora-border: #4b3a31;
+  --savora-shadow: rgba(0, 0, 0, 0.28);
+  --savora-navy: #102f49;
+  --savora-saffron: #f6bd60;
+  --savora-coral: #f28482;
+  --savora-mint: #5ac8ba;
+}
+
+html {
+  background: var(--savora-bg);
+  transition: background-color 300ms ease;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background-color: var(--savora-bg);
+  background-image: radial-gradient(
+    rgba(231, 111, 81, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  color: var(--savora-text);
+  font-family: "DM Sans", sans-serif;
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+.eyebrow {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button:not(.theme-toggle) {
+  cursor: pointer;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    filter 220ms ease;
+}
+
+button:not(.theme-toggle):hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: saturate(1.08);
+}
+
+button:not(.theme-toggle):active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+}
+
+input,
+textarea {
+  background: var(--savora-surface);
+  border-color: var(--savora-border);
+  color: var(--savora-text);
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 300ms ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--savora-muted);
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--savora-coral);
+  box-shadow: 0 0 0 4px rgba(231, 111, 81, 0.15);
+}
+
+.surface-panel {
+  background: color-mix(in srgb, var(--savora-surface) 94%, transparent);
+  border-color: var(--savora-border);
+  box-shadow: 0 14px 36px var(--savora-shadow);
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.accent-button {
+  background: linear-gradient(115deg, var(--savora-coral), #f4a261);
+  box-shadow: 0 10px 22px rgba(231, 111, 81, 0.25);
+}
+
+.secondary-button {
+  background: color-mix(
+    in srgb,
+    var(--savora-surface) 86%,
+    var(--savora-border)
+  );
+  color: var(--savora-text);
+  border: 1px solid var(--savora-border);
+}
+
+.eyebrow {
+  color: var(--savora-coral);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero-kicker,
+.card-kicker {
+  color: var(--savora-navy);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.52);
+  padding: 0.55rem 0.8rem;
+  box-shadow: 0 6px 18px rgba(108, 61, 28, 0.08);
+}
+
+.hero-kicker::before {
+  content: "✦";
+  color: var(--savora-coral);
+  font-size: 1rem;
+}
+
+.user-note {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--savora-saffron);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.user-note span {
+  color: var(--savora-coral);
+  font-size: 1rem;
+}
+
+.card-kicker {
+  position: absolute;
+  left: 0.8rem;
+  top: 0.8rem;
+  z-index: 1;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--savora-navy);
+  padding: 0.35rem 0.55rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+}
+
+.detail-hero {
+  border-color: rgba(231, 111, 81, 0.2);
+}
+
+.detail-hero img {
+  box-shadow: 0 16px 36px rgba(23, 63, 95, 0.18);
+}
+
+.status-pill,
+.info-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.status-pill {
+  background: var(--savora-mint);
+  color: white;
+}
+
+.info-pill {
+  background: color-mix(in srgb, var(--savora-saffron) 22%, transparent);
+  color: var(--savora-text);
+}
+
+.menu-item,
+.cart-item {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.menu-item:hover,
+.cart-item:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--savora-coral) 48%,
+    var(--savora-border)
+  );
+  box-shadow: 0 12px 28px var(--savora-shadow);
+  transform: translateY(-3px);
+}
+
+.quantity-button,
+.remove-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.65rem;
+  border: 1px solid var(--savora-border);
+  color: var(--savora-text);
+}
+
+.quantity-button {
+  height: 2rem;
+  width: 2rem;
+}
+
+.remove-button {
+  height: 2.25rem;
+  width: 2.25rem;
+  color: var(--savora-coral);
+}
+
+.quantity-button:hover,
+.remove-button:hover {
+  background: color-mix(in srgb, var(--savora-coral) 12%, transparent);
+}
+
+.empty-icon {
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, var(--savora-navy), var(--savora-mint));
+  color: white;
+  box-shadow: 0 18px 34px rgba(23, 63, 95, 0.24);
+  animation: float-soft 3s ease-in-out infinite;
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(2deg);
+  }
+}
+
+.savora-main > * {
+  animation: page-arrival 650ms both;
+}
+
+.savora-main > *:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+nav.bg-blue-600 {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(
+    105deg,
+    var(--savora-navy) 0%,
+    #20639b 58%,
+    var(--savora-mint) 140%
+  ) !important;
+  box-shadow: 0 10px 28px rgba(23, 63, 95, 0.24) !important;
+}
+
+header.bg-gradient-to-r {
+  background-size: 180% 180% !important;
+  background: linear-gradient(
+    120deg,
+    #f7efe4 0%,
+    #f4d8c5 48%,
+    #d9ebe6 100%
+  ) !important;
+  position: relative;
+  overflow: hidden;
+  animation: hero-drift 14s ease-in-out infinite alternate;
+}
+
+header.bg-gradient-to-r > div > div {
+  min-height: 0;
+}
+
+header.bg-gradient-to-r > div {
+  position: relative;
+  z-index: 1;
+}
+
+.food-tree {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 7rem;
+  z-index: 0;
+  width: clamp(9rem, 18vw, 15rem);
+  max-height: 31rem;
+  object-fit: contain;
+  opacity: 0.78;
+  pointer-events: none;
+}
+
+.hero-visual {
+  position: relative;
+  min-height: 300px;
+  align-items: center;
+}
+
+.hero-title {
+  max-width: 36rem;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.cuisine-strip {
+  background: rgba(29, 23, 20, 0.82);
+  box-shadow: 0 16px 30px rgba(29, 23, 20, 0.22);
+}
+
+.restaurant-showcase {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  background: rgba(29, 23, 20, 0.72);
+  box-shadow: 0 22px 44px rgba(29, 23, 20, 0.24);
+}
+
+.restaurant-showcase .hero-kicker {
+  position: absolute;
+  left: 1.25rem;
+  top: 1.25rem;
+  z-index: 2;
+  background: rgba(29, 23, 20, 0.84);
+  color: var(--savora-saffron);
+}
+
+.restaurant-showcase > img {
+  display: block;
+  width: 100%;
+  min-height: 20rem;
+  object-fit: cover;
+}
+
+.showcase-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.9rem 1.1rem 1.1rem;
+  color: var(--savora-text);
+}
+
+.showcase-caption span {
+  color: var(--savora-saffron);
+  letter-spacing: 0.15em;
+}
+
+.showcase-caption strong {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1rem;
+}
+
+.showcase-caption small {
+  color: var(--savora-muted);
+}
+
+.hero-visual > .bg-white {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+}
+
+.chef-avatar-frame {
+  background: #2a211d !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(246, 189, 96, 0.2),
+    0 14px 28px rgba(0, 0, 0, 0.2) !important;
+}
+
+:root[data-theme="dark"] .hero-visual > .bg-white {
+  background: rgba(29, 23, 20, 0.88) !important;
+  box-shadow: 0 24px 60px rgba(29, 23, 20, 0.34) !important;
+}
+
+.savora-sidebar {
+  padding-top: 2.75rem;
+}
+
+.food-scene {
+  position: absolute;
+  inset: 0;
+  min-height: 350px;
+  cursor: grab;
+  filter: drop-shadow(0 22px 24px rgba(23, 63, 95, 0.16));
+}
+
+.no-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(23, 63, 95, 0.52) transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+
+.no-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(23, 63, 95, 0.52);
+  border-radius: 999px;
+}
+
+.food-scene:active {
+  cursor: grabbing;
+}
+
+.hero-visual > .bg-white {
+  position: relative;
+  z-index: 2;
+}
+
+header.bg-gradient-to-r::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -150px;
+  top: -210px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 28px rgba(255, 255, 255, 0.08),
+    0 0 0 56px rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.delivery-route {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 9.5rem;
+  margin-top: -1rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, transparent, rgba(23, 63, 95, 0.2));
+}
+
+.delivery-route img {
+  display: block;
+  width: max(100%, 900px);
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+:root[data-theme="dark"] header.bg-gradient-to-r {
+  background: linear-gradient(
+    120deg,
+    #6c4523 0%,
+    #733b32 52%,
+    #285c59 100%
+  ) !important;
+}
+
+:root:not([data-theme="dark"]) .hero-kicker {
+  background: rgba(255, 255, 255, 0.72);
+}
+
+:root:not([data-theme="dark"]) .cuisine-strip {
+  background: rgba(23, 63, 95, 0.92);
+  box-shadow: 0 16px 30px rgba(23, 63, 95, 0.18);
+}
+
+footer.bg-gray-900 {
+  background: linear-gradient(135deg, #102f49, #173f5f 60%, #214e4a) !important;
+}
+
+:root[data-theme="dark"] .bg-slate-100 {
+  background: var(--savora-bg) !important;
+}
+
+:root[data-theme="dark"] .bg-slate-900 {
+  background: var(--savora-surface) !important;
+  border-color: var(--savora-border) !important;
+}
+
+.savora-card img {
+  transition:
+    transform 550ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 550ms ease;
+}
+
+.savora-card:hover img {
+  transform: scale(1.06);
+  filter: saturate(1.08);
+}
+
+.cuisine-tile {
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.cuisine-tile:hover {
+  transform: translateY(-5px) rotate(-1deg);
+  box-shadow: 0 12px 24px rgba(23, 63, 95, 0.2);
+}
+
+:root[data-theme="dark"] .hero-kicker,
+:root[data-theme="dark"] .card-kicker {
+  background: rgba(29, 23, 20, 0.82);
+  color: var(--savora-saffron);
+}
+
+.savora-card:nth-child(2) {
+  animation-delay: 70ms;
+}
+.savora-card:nth-child(3) {
+  animation-delay: 140ms;
+}
+.savora-card:nth-child(4) {
+  animation-delay: 210ms;
+}
+.savora-card:nth-child(5) {
+  animation-delay: 280ms;
+}
+
+@keyframes page-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 639px) {
+  header.bg-gradient-to-r > div > div {
+    min-height: auto;
+  }
+
+  .hero-visual {
+    min-height: 340px;
+  }
+
+  .food-tree {
+    right: -3rem;
+    bottom: 6rem;
+    width: 10rem;
+    opacity: 0.3;
+  }
+
+  .food-scene {
+    min-height: 390px;
+  }
+
+  .hero-visual > .bg-white {
+    margin-top: 5rem;
+  }
+}
+
+:root[data-theme="dark"] .bg-white,
+:root[data-theme="dark"] input {
+  background-color: var(--savora-surface) !important;
+  color: var(--savora-text) !important;
+  border-color: var(--savora-border) !important;
+}
+
+:root[data-theme="dark"] .text-gray-900,
+:root[data-theme="dark"] .text-gray-700,
+:root[data-theme="dark"] .text-gray-600,
+:root[data-theme="dark"] .text-gray-500 {
+  color: var(--savora-muted) !important;
+}
+
+:root[data-theme="dark"] .text-gray-900 {
+  color: var(--savora-text) !important;
+}
+
+:root[data-theme="dark"] .border-gray-300,
+:root[data-theme="dark"] hr {
+  border-color: var(--savora-border) !important;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  color: white;
+  cursor: pointer;
+  transition:
+    transform 200ms ease,
+    background-color 200ms ease;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: rotate(12deg) scale(1.06);
+}
+
+.savora-card {
+  animation: card-arrival 600ms both;
+  box-shadow: 0 8px 22px var(--savora-shadow);
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease,
+    background-color 300ms ease;
+}
+
+.savora-card:hover {
+  box-shadow: 0 18px 34px rgba(234, 88, 12, 0.22);
+}
+
+.sidebar-panel {
+  background: color-mix(in srgb, var(--savora-surface) 88%, transparent);
+  border: 1px solid var(--savora-border);
+  box-shadow: 0 18px 40px var(--savora-shadow);
+  backdrop-filter: blur(14px);
+}
+
+.sidebar-icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.75rem;
+  background: var(--savora-navy);
+  color: white;
+}
+
+.sidebar-label {
+  margin-bottom: 0.4rem;
+  color: var(--savora-muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.craving-callout {
+  border: 1px solid
+    color-mix(in srgb, var(--savora-saffron) 40%, var(--savora-border));
+  background: color-mix(in srgb, var(--savora-saffron) 12%, transparent);
+}
+
+.craving-star {
+  display: block;
+  color: var(--savora-coral);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.craving-callout strong,
+.craving-callout small {
+  display: block;
+}
+
+.craving-callout strong {
+  margin-top: 0.35rem;
+  color: var(--savora-text);
+  font-size: 0.78rem;
+}
+
+.craving-callout small {
+  margin-top: 0.25rem;
+  color: var(--savora-muted);
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.sidebar-link {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 0.8rem;
+  padding: 0.58rem 0.7rem;
+  color: var(--savora-muted);
+  font-size: 0.86rem;
+  text-align: left;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+  animation: craving-arrival 420ms both;
+}
+
+.sidebar-link:nth-child(2) {
+  animation-delay: 60ms;
+}
+.sidebar-link:nth-child(3) {
+  animation-delay: 120ms;
+}
+.sidebar-link:nth-child(4) {
+  animation-delay: 180ms;
+}
+.sidebar-link:nth-child(5) {
+  animation-delay: 240ms;
+}
+.sidebar-link:nth-child(6) {
+  animation-delay: 300ms;
+}
+
+.sidebar-link:hover,
+.sidebar-link.is-active {
+  background: color-mix(in srgb, var(--savora-coral) 14%, transparent);
+  color: var(--savora-coral);
+  transform: translateX(4px);
+}
+
+.sidebar-perk {
+  background: linear-gradient(135deg, var(--savora-navy), #20639b);
+  color: white;
+  animation: perk-glow 4s ease-in-out infinite;
+}
+
+.sidebar-perk p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.sidebar-cart {
+  border: 1px solid
+    color-mix(in srgb, var(--savora-coral) 34%, var(--savora-border));
+  background: color-mix(in srgb, var(--savora-coral) 11%, transparent);
+  color: var(--savora-coral);
+}
+
+@keyframes hero-drift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes perk-glow {
+  0%,
+  100% {
+    box-shadow: 0 8px 20px rgba(23, 63, 95, 0.1);
+  }
+  50% {
+    box-shadow: 0 12px 28px rgba(42, 157, 143, 0.28);
+  }
+}
+
+@keyframes craving-arrival {
+  from {
+    opacity: 0;
+    transform: translateX(-7px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes card-arrival {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

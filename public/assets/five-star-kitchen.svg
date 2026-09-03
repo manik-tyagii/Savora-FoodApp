@@ -1,0 +1,49 @@
+<svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="wall" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#6e3c2b" /><stop offset="1" stop-color="#3b2929" /></linearGradient>
+    <linearGradient id="window" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#1b2b36" /><stop offset="1" stop-color="#0e171e" /></linearGradient>
+    <linearGradient id="apron" x1="0" x2="1"><stop stop-color="#f8f4ea" /><stop offset="1" stop-color="#ccd9dc" /></linearGradient>
+    <style>
+      .steam { animation: rise 1.8s ease-in-out infinite; transform-origin: center; }
+      .stir { animation: stir 1.3s ease-in-out infinite; transform-origin: 305px 269px; }
+      @keyframes rise { 0%, 100% { opacity: .15; transform: translateY(5px); } 50% { opacity: .85; transform: translateY(-7px); } }
+      @keyframes stir { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(8deg); } }
+    </style>
+  </defs>
+  <rect width="640" height="360" rx="28" fill="url(#wall)" />
+  <path d="M36 102h568v224H36z" fill="#1c2023" stroke="#f6bd60" stroke-width="4" />
+  <path d="M55 123h530v174H55z" fill="url(#window)" />
+  <path d="M55 157h530M185 123v174M455 123v174" stroke="#f6bd60" stroke-opacity=".35" stroke-width="3" />
+  <path d="M31 102h578l-28-50H59z" fill="#173f5f" stroke="#f6bd60" stroke-width="4" />
+  <text x="320" y="84" text-anchor="middle" fill="#f8f4ea" font-family="Arial, sans-serif" font-weight="700" font-size="25" letter-spacing="4">THE SAVORA TABLE</text>
+  <g fill="#f6bd60" transform="translate(236 20)">
+    <path d="M21 0l6 14 15 1-11 10 4 15-14-8-14 8 4-15L0 15l15-1z" />
+    <path d="M73 0l6 14 15 1-11 10 4 15-14-8-14 8 4-15L52 15l15-1z" />
+    <path d="M125 0l6 14 15 1-11 10 4 15-14-8-14 8 4-15-11-10 15-1z" />
+    <path d="M177 0l6 14 15 1-11 10 4 15-14-8-14 8 4-15-11-10 15-1z" />
+    <path d="M229 0l6 14 15 1-11 10 4 15-14-8-14 8 4-15-11-10 15-1z" />
+  </g>
+  <rect x="72" y="279" width="496" height="14" rx="6" fill="#6f4030" stroke="#f6bd60" stroke-width="2" />
+  <g>
+    <path d="M267 274c2-43 18-69 46-76h23c28 7 44 33 46 76z" fill="url(#apron)" />
+    <path d="M305 200l18 21 18-21" fill="#e76f51" />
+    <path d="M279 212c-19 14-25 29-29 52M372 212c19 14 25 29 29 52" stroke="#f8f4ea" stroke-width="13" stroke-linecap="round" />
+    <circle cx="248" cy="268" r="8" fill="#d99b70" /><circle cx="405" cy="268" r="8" fill="#d99b70" />
+    <path d="M278 142c0-28 18-46 46-46s46 18 46 46v40c0 25-20 40-46 40s-46-15-46-40z" fill="#d99b70" />
+    <path d="M281 149c-7-37 12-62 43-62 28 0 45 21 42 57-11-14-24-22-43-22-18 0-30 9-42 27z" fill="#171619" />
+    <path d="M281 105c-2-22 12-34 29-38 10-10 23-7 29 3 18-4 30 8 28 25 9 5 7 16-1 21-13-9-29-13-46-12-16 1-28 5-39 11z" fill="#f8f4ea" stroke="#dce5e5" stroke-width="2" />
+    <path d="M286 123h82" stroke="#e76f51" stroke-width="5" stroke-linecap="round" />
+    <path d="M295 155c8-4 15-4 22 0M330 155c8-4 15-4 22 0" stroke="#2f2423" stroke-width="4" stroke-linecap="round" />
+    <circle cx="310" cy="165" r="4" fill="#17202a" /><circle cx="341" cy="165" r="4" fill="#17202a" />
+    <path d="M321 169l-4 13 7 2M310 195c9 5 19 5 28 0" stroke="#8f4939" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  </g>
+  <g class="stir">
+    <ellipse cx="305" cy="270" rx="45" ry="11" fill="#111820" />
+    <ellipse cx="305" cy="267" rx="35" ry="7" fill="#e76f51" />
+    <path d="M342 267h42" stroke="#f6bd60" stroke-width="6" stroke-linecap="round" />
+  </g>
+  <g class="steam" fill="none" stroke="#f8f4ea" stroke-width="4" stroke-linecap="round">
+    <path d="M289 250c-10-14 9-18 0-33" /><path d="M305 248c-10-14 9-19 0-36" /><path d="M321 250c-10-14 9-18 0-33" />
+  </g>
+  <path d="M70 314h500" stroke="#f6bd60" stroke-width="3" stroke-opacity=".5" />
+</svg>
